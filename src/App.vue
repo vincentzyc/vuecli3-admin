@@ -1,22 +1,17 @@
 <template>
     <div id="app">
-        <Layout />
+        <transition name="move" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 
 <script>
-import Layout from "@/components/layout";
-
 export default {
     name: "app",
-    components: {
-        Layout
-    },
     // watch: {
     //     $route() {
-    //         if (!localStorage.getItem("loanuser")) {
-    //             this.$router.push("/login");
-    //         }
+    //         !localStorage.getItem("loanuser") ? this.$router.push("/login") : "";
     //     }
     // }
 };

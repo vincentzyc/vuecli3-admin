@@ -30,14 +30,6 @@ export default {
         onRoutes() {
             return "/" + this.$route.path.split("/")[1];
         }
-    },
-    created() {
-        let userInfo = this.$api.getLStorage("loanuser", "decode");
-        if (userInfo) {
-            console.log(userInfo);
-        } else {
-            this.$api.setLStorage("loanuser", { username: "Hello World" }, "decode");
-        }
     }
 };
 </script>

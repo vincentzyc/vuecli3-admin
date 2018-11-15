@@ -8,8 +8,8 @@
                     <i class="el-icon-caret-bottom drop-icon"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item @click="changePass()">修改密码</el-dropdown-item>
-                    <el-dropdown-item @click="loginout()">退出登录</el-dropdown-item>
+                    <el-dropdown-item @click.native="changePass()">修改密码</el-dropdown-item>
+                    <el-dropdown-item @click.native="loginout()">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
             </el-dropdown>
         </div>
@@ -30,8 +30,11 @@ export default {
         }
     },
     methods: {
-        loginout() {},
-        changePass() {}
+        changePass() {},
+        loginout() {
+            window.localStorage.removeItem("loanuser");
+            this.$router.replace("/login");
+        }
     }
 };
 </script>

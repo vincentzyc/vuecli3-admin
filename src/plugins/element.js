@@ -10,7 +10,7 @@ import {
     Submenu,
     MenuItem,
     // MenuItemGroup,
-    // Input,
+    Input,
     // InputNumber,
     // Radio,
     // RadioGroup,
@@ -33,8 +33,8 @@ import {
     // Tooltip,
     // Breadcrumb,
     // BreadcrumbItem,
-    // Form,
-    // FormItem,
+    Form,
+    FormItem,
     // Tabs,
     // TabPane,
     // Tag,
@@ -79,7 +79,7 @@ import {
   Vue.use(Submenu);
   Vue.use(MenuItem);
 //   Vue.use(MenuItemGroup);
-//   Vue.use(Input);
+  Vue.use(Input);
 //   Vue.use(InputNumber);
 //   Vue.use(Radio);
 //   Vue.use(RadioGroup);
@@ -102,8 +102,8 @@ import {
 //   Vue.use(Tooltip);
 //   Vue.use(Breadcrumb);
 //   Vue.use(BreadcrumbItem);
-//   Vue.use(Form);
-//   Vue.use(FormItem);
+  Vue.use(Form);
+  Vue.use(FormItem);
 //   Vue.use(Tabs);
 //   Vue.use(TabPane);
 //   Vue.use(Tag);
