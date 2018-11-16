@@ -36,6 +36,11 @@ export default {
             this.showSidebar ? (document.getElementById("container").style.left = 0) : (document.getElementById("container").style.left = "200px");
             this.showSidebar = !this.showSidebar;
         }
+    },
+    mounted() {
+        this.$nextTick(function() {
+            window.dom_container = document.getElementById("container");
+        });
     }
 };
 </script>

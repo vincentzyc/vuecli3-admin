@@ -8,11 +8,6 @@
 
 <script>
 export default {
-    name: "app",
-    // watch: {
-    //     $route() {
-    //         !localStorage.getItem("loanuser") ? this.$router.push("/login") : "";
-    //     }
-    // }
+    name: "app"
 };
 </script>

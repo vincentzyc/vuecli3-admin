@@ -120,7 +120,7 @@ export default {
         }
         if (n === 0) return Math.round(x);
         var num = Number("1E" + n);
-        var f = Math.round(x * num) / num;
+        f = Math.round(x * num) / num;
         var s = f.toString();
         var rs = s.indexOf(".");
         if (rs < 0) {
@@ -187,10 +187,46 @@ export default {
         let queryData = "",
             downloadUrl = "";
         for (const [key, value] of Object.entries(data)) {
-            if(key === 'sessionId') break;
+            if (key === 'sessionId') break;
             queryData += `${key}=${value}&`;
         }
         downloadUrl = url + "?" + queryData.slice(0, -1);
         window.location.href = downloadUrl;
     },
+    /**
+     * 缓冲函数
+     * @param {Object} dom 目标dom
+     * @param {Number} destination 目标位置
+     * @param {Number} rate 缓动率
+     * @param {Function} callback 缓动结束回调函数 两个参数分别是当前位置和是否结束
+     * 示例用法
+      var dom = document.documentElement || document.body;
+      this.$api.easeout(dom, 0, 5, function (val) {
+        dom.scrollTop = val;
+      });
+     */
+    easeout(dom, destination, rate, callback) {
+        let position = dom.scrollTop;
+        if (position === destination || typeof destination !== 'number') {
+            return false;
+        }
+        destination = destination || 0;
+        rate = rate || 2;
+        // 不存在原生`requestAnimationFrame`，用`setTimeout`模拟替代
+        if (!window.requestAnimationFrame) {
+            window.requestAnimationFrame = function(fn) {
+                return setTimeout(fn, 17);
+            }
+        }
+        let step = function() {
+            position = position + (destination - position) / rate;
+            if (Math.abs(destination - position) < 1) {
+                callback(destination, true);
+                return;
+            }
+            callback(position, false);
+            requestAnimationFrame(step);
+        };
+        step();
+    }
 };

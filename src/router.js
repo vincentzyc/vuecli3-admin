@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+const vue = new Vue();
 Vue.use(Router)
 
 const checkLogin = () => localStorage.getItem("loanuser") ? "/home" : "/login"
@@ -46,8 +47,13 @@ router.beforeEach((to, from, next) => {
     }
     localStorage.getItem("loanuser") ? next() : next('/login');
 })
-// router.afterEach((to, from) => {
+router.afterEach(() => {
+    if (window.dom_container) {
+        vue.$api.easeout(window.dom_container, 0, 5, function(val) {
+            window.dom_container.scrollTop = val;
+        });
+    }
 
-// })
+})
 
 export default router
