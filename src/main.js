@@ -3,11 +3,13 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
-import Api from './assets/js/api';
 import '@/assets/css/base.css'
+import Api from './assets/js/api';
+import Components from "./modules";
 
 Vue.config.productionTip = false
 
+Vue.use(Components)
 Vue.use(Api)
 
 new Vue({

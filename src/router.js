@@ -28,13 +28,13 @@ const router = new Router({
                     path: '/ad',
                     name: 'ad',
                     component: () => import('@/views/Ad.vue')
-                },
-                {
-                    path: '*',
-                    name: '404',
-                    component: () => import("@/views/404.vue")
                 }
             ]
+        },
+        {
+            path: '*',
+            name: '404',
+            component: () => import("@/views/404.vue")
         }
     ]
 })

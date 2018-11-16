@@ -65,7 +65,7 @@ export default {
 #container {
     background: none repeat scroll 0 0 #fff;
     position: absolute;
-    left: 220px;
+    left: 200px;
     right: 0;
     top: 70px;
     bottom: 0;
