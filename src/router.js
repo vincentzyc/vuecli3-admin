@@ -53,7 +53,6 @@ router.afterEach(() => {
             window.dom_container.scrollTop = val;
         });
     }
-
 })
 
 export default router
