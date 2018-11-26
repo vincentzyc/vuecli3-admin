@@ -10,23 +10,23 @@ const padding = require("crypto-js/pad-pkcs7");
 const default_key = "junbokey12345678";
 
 export default {
-    encrypt(data, key) {
-        let real_key = utf8.parse(md5(key || default_key).toString().slice(0, 16));
-        let bytes = AES.encrypt(data, real_key, {
-            iv: iv,
-            mode: mode,
-            padding: padding
-        });
-        return bytes.toString();
-    },
-    decrypt(data, key) {
-        if (!data) return null;
-        let real_key = utf8.parse(md5(key || default_key).toString().slice(0, 16));
-        let bytes = AES.decrypt(data, real_key, {
-            iv: iv,
-            mode: mode,
-            padding: padding
-        });
-        return bytes.toString(utf8);
-    }
+	encrypt(data, key) {
+		let real_key = utf8.parse(md5(key || default_key).toString().slice(0, 16));
+		let bytes = AES.encrypt(data, real_key, {
+			iv: iv,
+			mode: mode,
+			padding: padding
+		});
+		return bytes.toString();
+	},
+	decrypt(data, key) {
+		if (!data) return null;
+		let real_key = utf8.parse(md5(key || default_key).toString().slice(0, 16));
+		let bytes = AES.decrypt(data, real_key, {
+			iv: iv,
+			mode: mode,
+			padding: padding
+		});
+		return bytes.toString(utf8);
+	}
 }

@@ -1,20 +1,36 @@
 <template>
-    <div class="login-wrap">
-        <div class="ms-title">管理系统</div>
-        <div class="ms-login">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
-                <el-form-item prop="userName">
-                    <el-input v-model="ruleForm.userName" placeholder="请输入用户名"></el-input>
-                </el-form-item>
-                <el-form-item prop="passWord">
-                    <el-input type="password" placeholder="请输入密码" v-model="ruleForm.passWord" @keyup.enter.native="submitForm('ruleForm')"></el-input>
-                </el-form-item>
-                <div class="login-btn">
-                    <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
-                </div>
-            </el-form>
+  <div class="login-wrap">
+    <div class="ms-title">管理系统</div>
+    <div class="ms-login">
+      <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="0px"
+      >
+        <el-form-item prop="userName">
+          <el-input
+            v-model="ruleForm.userName"
+            placeholder="请输入用户名"
+          ></el-input>
+        </el-form-item>
+        <el-form-item prop="passWord">
+          <el-input
+            type="password"
+            placeholder="请输入密码"
+            v-model="ruleForm.passWord"
+            @keyup.enter.native="submitForm('ruleForm')"
+          ></el-input>
+        </el-form-item>
+        <div class="login-btn">
+          <el-button
+            type="primary"
+            @click="submitForm('ruleForm')"
+          >登录</el-button>
         </div>
+      </el-form>
     </div>
+  </div>
 </template>
 
 <script>

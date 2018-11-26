@@ -1,20 +1,27 @@
 <template>
-    <div class="wrapper">
-        <header class="header">
-            <v-header></v-header>
-        </header>
-        <div class="sidebar">
-            <v-sidebar></v-sidebar>
-        </div>
-        <div id="container">
-            <div class="handle-sidebar" :class="showSidebar?'el-icon-caret-left':'el-icon-caret-right'" @click="toggleSidebar()"></div>
-            <div style="min-width: 1100px;">
-                <transition name="move" mode="out-in">
-                    <router-view></router-view>
-                </transition>
-            </div>
-        </div>
+  <div class="wrapper">
+    <header class="header">
+      <v-header></v-header>
+    </header>
+    <div class="sidebar">
+      <v-sidebar></v-sidebar>
     </div>
+    <div id="container">
+      <div
+        class="handle-sidebar"
+        :class="showSidebar?'el-icon-caret-left':'el-icon-caret-right'"
+        @click="toggleSidebar()"
+      ></div>
+      <div style="min-width: 1100px;">
+        <transition
+          name="move"
+          mode="out-in"
+        >
+          <router-view></router-view>
+        </transition>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

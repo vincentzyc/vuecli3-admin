@@ -1,19 +1,23 @@
 <template>
-    <div class="flex header-wrap">
-        <div class="logo align-self-middle">管理系统模板</div>
-        <div class="flex flex-auto justify-end">
-            <el-dropdown trigger="click" class="flex dropdown align-middle" placement="bottom">
-                <span class="el-dropdown-link">
-                    <strong>{{username}}</strong>
-                    <i class="el-icon-caret-bottom drop-icon"></i>
-                </span>
-                <el-dropdown-menu slot="dropdown">
-                    <el-dropdown-item @click.native="changePass()">修改密码</el-dropdown-item>
-                    <el-dropdown-item @click.native="loginout()">退出登录</el-dropdown-item>
-                </el-dropdown-menu>
-            </el-dropdown>
-        </div>
+  <div class="flex header-wrap">
+    <div class="logo align-self-middle">管理系统模板</div>
+    <div class="flex flex-auto justify-end">
+      <el-dropdown
+        trigger="click"
+        class="flex dropdown align-middle"
+        placement="bottom"
+      >
+        <span class="el-dropdown-link">
+          <strong>{{username}}</strong>
+          <i class="el-icon-caret-bottom drop-icon"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item @click.native="changePass()">修改密码</el-dropdown-item>
+          <el-dropdown-item @click.native="loginout()">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
     </div>
+  </div>
 </template>
 
 <script>

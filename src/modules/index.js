@@ -3,20 +3,20 @@ import BasePage from './base-page'; //页面组件
 const version = '1.0';
 const install = function(Vue) {
 
-    if (install.installed) return;
+	if (install.installed) return;
 
-    Vue.component(BasePage.name, BasePage); //注册组件
+	Vue.component(BasePage.name, BasePage); //注册组件
 
 };
 
 // auto install
 if (typeof window !== 'undefined' && window.Vue) {
-    install(window.Vue);
+	install(window.Vue);
 }
 
 export default {
-    install,
-    version
+	install,
+	version
 };
 
 /**
