@@ -133,13 +133,15 @@ export default {
 		return s;
 	},
 	/**
-	 * 获取当前日期时间 默认格式 "yyyy-mm-dd hh:mm:ss"
+	 * 获取日期时间 默认格式 "yyyy-mm-dd hh:mm:ss"
 	 * @param {String} formatType  可选 格式类型
+	 * @param {Date} formatDate  可选 指定日期
+	 * @return {String} 所需格式的日期
 	 */
-	getNowDate(formatType) {
+	getFormatDate(formatType, formatDate) {
 		let type = formatType || 'yyyy-mm-dd hh:mm:ss';
+		let date = Object.prototype.toString.call(formatDate) === "[object Date]" ? formatDate : new Date();
 		let currentdate = '';
-		let date = new Date();
 		let month = date.getMonth() + 1;
 		let strDate = date.getDate();
 		let minutes = date.getMinutes();
