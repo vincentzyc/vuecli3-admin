@@ -200,20 +200,15 @@ export default {
 	 * @param {Object} dom 目标dom
 	 * @param {Number} destination 目标位置
 	 * @param {Number} rate 缓动率
-	 * @param {Function} callback 缓动结束回调函数 两个参数分别是当前位置和是否结束
 	 * 示例用法
 	  var dom = document.documentElement || document.body;
-	  this.$api.easeout(dom, 0, 5, function (val) {
-	    dom.scrollTop = val;
-	  });
+	  this.$api.easeout(dom, 0, 5);
 	 */
-	easeout(dom, destination, rate, callback) {
+	easeout(dom, destination = 0, rate = 3) {
 		let position = dom.scrollTop;
-		if (position === destination || typeof destination !== 'number') {
+		if (position === destination || typeof destination !== 'number' || rate === 0) {
 			return false;
 		}
-		destination = destination || 0;
-		rate = rate || 2;
 		// 不存在原生`requestAnimationFrame`，用`setTimeout`模拟替代
 		if (!window.requestAnimationFrame) {
 			window.requestAnimationFrame = function(fn) {
@@ -222,11 +217,11 @@ export default {
 		}
 		let step = function() {
 			position = position + (destination - position) / rate;
-			if (Math.abs(destination - position) < 1) {
-				callback(destination, true);
+			if (Math.abs(destination - position) < 1) { //动画结束
+				dom.scrollTop = destination;
 				return;
 			}
-			callback(position, false);
+			dom.scrollTop = position;
 			requestAnimationFrame(step);
 		};
 		step();

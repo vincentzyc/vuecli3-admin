@@ -49,9 +49,7 @@ router.beforeEach((to, from, next) => {
 })
 router.afterEach(() => {
 	if (window.dom_container) {
-		vue.$api.easeout(window.dom_container, 0, 5, function(val) {
-			window.dom_container.scrollTop = val;
-		});
+		vue.$api.easeout(window.dom_container, 0, 5);
 	}
 })
 
