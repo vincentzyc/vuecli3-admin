@@ -2,6 +2,7 @@
   <base-page
     :paths="[111,222,333]"
     title="广告管理"
+    hideBack
   >
     <div
       class="ad"

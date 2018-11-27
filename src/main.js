@@ -5,11 +5,11 @@ import store from './store'
 import './plugins/element.js'
 import '@/assets/css/base.css'
 import Api from './assets/js/api';
-import Components from "./modules";
+import BaseComponents from "./components/base";
 
 Vue.config.productionTip = false
 
-Vue.use(Components)
+Vue.use(BaseComponents)
 Vue.use(Api)
 
 new Vue({

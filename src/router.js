@@ -15,7 +15,7 @@ const router = new Router({
 		{
 			path: "/login",
 			name: 'login',
-			component: () => import("@/views/Login.vue")
+			component: () => import("@/views/login.vue")
 		},
 		{
 			path: "/home",
@@ -23,12 +23,12 @@ const router = new Router({
 			children: [{
 					path: '/',
 					name: 'home',
-					component: () => import('@/views/Home.vue')
+					component: () => import('@/views/home.vue')
 				},
 				{
 					path: '/ad',
 					name: 'ad',
-					component: () => import('@/views/Ad.vue')
+					component: () => import('@/views/ad.vue')
 				}
 			]
 		},
