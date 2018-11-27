@@ -22,42 +22,42 @@
 
 <script>
 export default {
-    data() {
-        return {
-            name: "Hello World"
-        };
-    },
-    computed: {
-        username() {
-            let userInfo = this.$api.getLStorage("loanuser", "decode");
-            return userInfo ? userInfo.username : this.name;
-        }
-    },
-    methods: {
-        changePass() {},
-        loginout() {
-            window.localStorage.removeItem("loanuser");
-            this.$router.replace("/login");
-        }
+  data() {
+    return {
+      name: "Hello World"
+    };
+  },
+  computed: {
+    username() {
+      let userInfo = this.$api.getLStorage("loanuser", "decode");
+      return userInfo ? userInfo.username : this.name;
     }
+  },
+  methods: {
+    changePass() {},
+    loginout() {
+      window.localStorage.removeItem("loanuser");
+      this.$router.replace("/login");
+    }
+  }
 };
 </script>
 
 <style scoped>
 .header-wrap {
-    height: 100%;
+  height: 100%;
 }
 .logo {
-    padding: 0 30px;
-    text-align: center;
+  padding: 0 30px;
+  text-align: center;
 }
 .dropdown {
-    height: 100%;
-    padding: 0 30px;
-    background: #eee;
+  height: 100%;
+  padding: 0 30px;
+  background: #eee;
 }
 .el-dropdown-link {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>
 

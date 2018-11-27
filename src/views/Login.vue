@@ -35,76 +35,82 @@
 
 <script>
 export default {
-    data: function() {
-        return {
-            nextUrl: "",
-            ruleForm: {
-                userName: "",
-                passWord: ""
-            },
-            rules: {
-                userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-                passWord: [{ required: true, message: "请输入密码", trigger: "blur" }]
-            }
-        };
-    },
-    methods: {
-        submitForm(formName) {
-            this.$refs[formName].validate(valid => {
-                if (valid) {
-                    this.$api.setLStorage("loanuser", { username: this.ruleForm.userName }, "decode");
-                    this.$router.push("/home");
-                } else {
-                    console.log("error submit!!");
-                    return false;
-                }
-            });
+  data: function() {
+    return {
+      nextUrl: "",
+      ruleForm: {
+        userName: "",
+        passWord: ""
+      },
+      rules: {
+        userName: [
+          { required: true, message: "请输入用户名", trigger: "blur" }
+        ],
+        passWord: [{ required: true, message: "请输入密码", trigger: "blur" }]
+      }
+    };
+  },
+  methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$api.setLStorage(
+            "loanuser",
+            { username: this.ruleForm.userName },
+            "decode"
+          );
+          this.$router.push("/home");
+        } else {
+          console.log("error submit!!");
+          return false;
         }
-    },
-    created() {
-        let userInfo = this.$api.getLStorage("loanuser", "decode");
-        if (userInfo) {
-            this.ruleForm.userName = userInfo.username;
-        }
+      });
     }
+  },
+  created() {
+    let userInfo = this.$api.getLStorage("loanuser", "decode");
+    if (userInfo) {
+      this.ruleForm.userName = userInfo.username;
+    }
+  }
 };
 </script>
 
 <style scoped>
 .login-wrap {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background: #324157;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #324157;
 }
 
 .ms-title {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    margin-top: -230px;
-    text-align: center;
-    font-size: 30px;
-    color: #fff;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  margin-top: -230px;
+  text-align: center;
+  font-size: 30px;
+  color: #fff;
 }
 
 .ms-login {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 380px;
-    margin: -150px 0 0 -190px;
-    padding: 40px;
-    border-radius: 5px;
-    background: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 380px;
+  margin: -150px 0 0 -190px;
+  padding: 40px;
+  border-radius: 5px;
+  background: #fff;
 }
 
 .login-btn {
-    text-align: center;
+  text-align: center;
 }
 
 .login-btn button {
-    width: 100%;
-    height: 36px;
+  width: 100%;
+  height: 36px;
 }
 </style>

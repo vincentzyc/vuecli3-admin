@@ -39,23 +39,23 @@
 <script>
 import crmMenus from "@/assets/json/sidebar.json";
 export default {
-    data() {
-        return {
-            items: crmMenus
-        };
-    },
-    computed: {
-        onRoutes() {
-            return "/" + this.$route.path.split("/")[1];
-        }
+  data() {
+    return {
+      items: crmMenus
+    };
+  },
+  computed: {
+    onRoutes() {
+      return "/" + this.$route.path.split("/")[1];
     }
+  }
 };
 </script>
 
 <style scoped>
 .sidebar-menu {
-    height: 100%;
-    overflow-y: auto;
+  height: 100%;
+  overflow-y: auto;
 }
 </style>
 
