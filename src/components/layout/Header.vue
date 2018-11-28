@@ -2,11 +2,7 @@
   <div class="flex header-wrap">
     <div class="logo align-self-middle">管理系统模板</div>
     <div class="flex flex-auto justify-end">
-      <el-dropdown
-        trigger="click"
-        class="flex dropdown align-middle"
-        placement="bottom"
-      >
+      <el-dropdown trigger="click" class="flex dropdown align-middle" placement="bottom">
         <span class="el-dropdown-link">
           <strong>{{username}}</strong>
           <i class="el-icon-caret-bottom drop-icon"></i>

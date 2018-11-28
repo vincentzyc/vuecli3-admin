@@ -1,22 +1,12 @@
 <template>
   <div class="base-page">
     <header class="flex breadcrumb align-middle">
-      <el-breadcrumb
-        separator-class="el-icon-arrow-right"
-        class="flex-auto"
-      >
+      <el-breadcrumb separator-class="el-icon-arrow-right" class="flex-auto">
         <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item
-          v-for="item in paths"
-          :key="item"
-        >{{item}}</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="item in paths" :key="item">{{item}}</el-breadcrumb-item>
       </el-breadcrumb>
       <h2 class="flex-auto text-center">{{title}}</h2>
-      <el-button
-        type="primary"
-        @click="$emit('handleBack')"
-        v-if="!hideBack"
-      >返回上一页</el-button>
+      <el-button type="primary" @click="$emit('handleBack')" v-if="!hideBack">返回上一页</el-button>
     </header>
     <main class="content">
       <slot name="content">{{content}}</slot>

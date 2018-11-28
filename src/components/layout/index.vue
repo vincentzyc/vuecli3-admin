@@ -13,10 +13,7 @@
         @click="toggleSidebar()"
       ></div>
       <div style="min-width: 1100px;">
-        <transition
-          name="move"
-          mode="out-in"
-        >
+        <transition name="move" mode="out-in">
           <router-view></router-view>
         </transition>
       </div>
