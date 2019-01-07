@@ -29,6 +29,11 @@ const router = new Router({
 					path: '/ad',
 					name: 'ad',
 					component: () => import('@/views/ad.vue')
+				},
+				{
+					path: '/basetabel',
+					name: 'basetabel',
+					component: () => import('@/views/basetabel.vue')
 				}
 			]
 		},

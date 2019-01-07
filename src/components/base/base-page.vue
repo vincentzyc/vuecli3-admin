@@ -16,7 +16,7 @@
 
 <script type="text/ecmascript-6">
 export default {
-  name: "base-page",
+  name: "BasePage",
   props: {
     title: {
       type: String,
