@@ -1,5 +1,6 @@
 <template>
   <div class="base-tabel">
+    
     <el-form ref="formData" :model="formData" :inline="true" size="small" class="mg-t20">
       <el-form-item v-for="(item,key) in baseData.condition" :label="item.label" :key="key">
         <el-date-picker
@@ -21,43 +22,42 @@
       </el-form-item>
     </el-form>
 
-    <div class="mg-t20" v-if="baseData.table.list.length>0">
-      <el-table :data="baseData.table.list" stripe tooltip-effect="light" border>
-        <el-table-column label="序号" align="center" type="index" :index="showTableIndex(baseData.pagination.pageIndex,baseData.pagination.pageSize)" width="55"></el-table-column>
-        <el-table-column
-          v-for="(column,key) in baseData.table.columns"
-          :key="key"
-          :prop="column.key"
-          :label="column.label"
-          align="center"
-          :show-overflow-tooltip="true"
-        >
-          <template slot-scope="{row}">
-            <template v-if="column.type==='text'">{{ row[column.key] }}</template>
-            <template v-if="column.type==='format'">
-              <span v-html="column.format(row)"></span>
-            </template>
-            <template v-if="column.type==='textBtn'">
-              <el-button v-for="(btn,key) in column.textBtn" :key="key" type="text" @click="btn.handleClick(row)">{{btn.text}}</el-button>
-            </template>
-            <template v-if="column.type==='slot'">
-              <slot :name="column.slot" :row="row"></slot>
-            </template>
+    <el-table :data="baseData.table.list" stripe tooltip-effect="light" border class="mg-t20">
+      <el-table-column label="序号" align="center" type="index" :index="showTableIndex(baseData.pagination.pageIndex,baseData.pagination.pageSize)" width="55"></el-table-column>
+      <el-table-column
+        v-for="(column,key) in baseData.table.columns"
+        :key="key"
+        :prop="column.key"
+        :label="column.label"
+        align="center"
+        :show-overflow-tooltip="true"
+      >
+        <template slot-scope="{row}">
+          <template v-if="column.type==='text'">{{ row[column.key] }}</template>
+          <template v-if="column.type==='format'">
+            <span v-html="column.format(row)"></span>
           </template>
-        </el-table-column>
-      </el-table>
+          <template v-if="column.type==='textBtn'">
+            <el-button v-for="(btn,key) in column.textBtn" :key="key" type="text" @click="btn.handleClick(row)">{{btn.text}}</el-button>
+          </template>
+          <template v-if="column.type==='slot'">
+            <slot :name="column.slot" :row="row"></slot>
+          </template>
+        </template>
+      </el-table-column>
+    </el-table>
 
-      <div class="pull-right mg-t20 mg-b20" v-if="baseData.hasOwnProperty('pagination')">
-        <el-pagination
-          @current-change="handleCurrentChange"
-          @size-change="handleSizeChange"
-          :current-page="baseData.pagination.pageIndex||1"
-          :page-sizes="[10, 20, 50, 100]"
-          :page-size="baseData.pagination.pageSize||10"
-          :total="baseData.pagination.totalCount||0"
-          :layout="baseData.pagination.layout||'total, sizes, prev, pager, next, jumper'"
-        ></el-pagination>
-      </div>
+    <div class="pull-right mg-t20 mg-b20" v-if="baseData.table.list.length>0&&baseData.hasOwnProperty('pagination')">
+      <el-pagination
+        @current-change="handleCurrentChange"
+        @size-change="handleSizeChange"
+        :current-page="baseData.pagination.pageIndex||1"
+        :page-sizes="[10, 20, 50, 100]"
+        :page-size="baseData.pagination.pageSize||10"
+        :total="baseData.pagination.totalCount||0"
+        :layout="baseData.pagination.layout||'total, sizes, prev, pager, next, jumper'"
+      ></el-pagination>
+
     </div>
   </div>
 </template>
