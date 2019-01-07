@@ -60,7 +60,7 @@ export default {
           }
         }, {
           type: 'slot',
-          slot: 'test'
+          slot: 'slot1'
         }],
         table: {
           list: [{
