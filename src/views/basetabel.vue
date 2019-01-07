@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseTable ref="baseTable" :baseData="baseData" :formData.sync="formData">
+    <BaseTable ref="baseTable" :baseData="baseData" :formData.sync="formData" @getList="handleSearch">
       <template slot="slot1">
         <el-button type="primary" size="small" @click="test1()">测试测试</el-button>
       </template>

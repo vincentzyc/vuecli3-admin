@@ -1,24 +1,26 @@
 <template>
   <div class="base-tabel">
-    <el-form :model="formData" :inline="true" size="small" class="mg-t20" v-if="baseData.hasOwnProperty('condition')">
-      <el-form-item v-for="(item,key) in baseData.condition" :label="item.label" :key="key">
-        <el-date-picker
-          v-if="item.type==='datePicker'"
-          v-model="formData[item.key]"
-          type="daterange"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          value-format="yyyy-MM-dd"
-          @change="getDate(item)"
-          size="small"
-        ></el-date-picker>
-        <el-input v-if="item.type==='input'" v-model="formData[item.key]" placeholder="请输入" size="small"></el-input>
-        <el-select v-if="item.type==='select'" v-model="formData[item.key]" placeholder="请选择" size="small">
-          <el-option v-for="option in item.options" :label="option.label" :value="option.value" :key="option.value"></el-option>
-        </el-select>
-        <el-button v-if="item.type==='button'" type="primary" size="small" @click="item.handleClick()">{{item.text}}</el-button>
+    <el-form :model="formData" :inline="true" size="small" class="relative mg-t20" v-if="baseData.hasOwnProperty('condition')">
+      <template v-for="(item,key) in baseData.condition">
+        <el-form-item :label="item.label" :key="key">
+          <el-date-picker
+            v-if="item.type==='datePicker'"
+            v-model="formData[item.key]"
+            type="daterange"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            value-format="yyyy-MM-dd"
+            @change="getDate(item)"
+            size="small"
+          ></el-date-picker>
+          <el-input v-if="item.type==='input'" v-model="formData[item.key]" placeholder="请输入" size="small"></el-input>
+          <el-select v-if="item.type==='select'" v-model="formData[item.key]" placeholder="请选择" size="small">
+            <el-option v-for="option in item.options" :label="option.label" :value="option.value" :key="option.value"></el-option>
+          </el-select>
+          <el-button v-if="item.type==='button'" type="primary" size="small" @click="item.handleClick()">{{item.text}}</el-button>
+        </el-form-item>
         <slot v-if="item.type==='slot'" :name="item.slot"></slot>
-      </el-form-item>
+      </template>
     </el-form>
 
     <el-table ref="elTable" :data="baseData.table.list" stripe tooltip-effect="light" border class="mg-t20" v-if="baseData.hasOwnProperty('table')">
