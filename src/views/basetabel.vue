@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseTable ref="baseTable" :baseData="baseData" :formData="formData">
+    <BaseTable ref="baseTable" :baseData="baseData" :formData.sync="formData">
       <template slot="slot1">
         <el-button type="primary" size="small" @click="test1()">测试测试</el-button>
       </template>
@@ -24,7 +24,10 @@ export default {
   data() {
     return {
       formData: {
-        filterStartAndEndTime: ["2019-01-01", "2019-01-06"] //设置默认值
+        filterStartAndEndTime: ["2019-01-01", "2019-01-06"], //设置默认值
+        pageIndex: 1,
+        pageSize: 2,
+        totalCount: 6,
       },
       baseData: {
         condition: [{
@@ -32,11 +35,11 @@ export default {
           key: 'filterStartAndEndTime',
           startKey: 'filterStartTime',
           endKey: 'filterEndTime',
-          label:'起止时间：'
+          label: '起止时间：'
         }, {
           type: 'input',
           key: 'modelName',
-          label:'输入框：'
+          label: '输入框：'
         }, {
           type: 'select',
           key: 'productType',
@@ -50,7 +53,7 @@ export default {
             label: 'H5',
             value: 'H5'
           }],
-          label:'选择框：'
+          label: '选择框：'
         }, {
           type: 'button',
           text: '查询',
@@ -84,41 +87,36 @@ export default {
           }],
           columns: [{
             key: 'data1',
-            label: '标题1',
-            type:'text'
+            label: '标题1'
           }, {
             key: 'data2',
             label: '标题2',
-            type:'format',
+            type: 'format',
             format: row => {
               return row.data2 + '%';
             }
           }, {
             key: 'data3',
             label: '操作',
-            type:'textBtn',
+            type: 'textBtn',
             textBtn: [{
               text: "操作一",
-              handleClick: row => { console.log(row,'操作一') }
+              handleClick: row => { console.log(row, '操作一') }
             }, {
               text: "操作二",
-              handleClick: row => { console.log(row,'操作二') }
+              handleClick: row => { console.log(row, '操作二') }
             }, {
               text: "操作三",
-              handleClick: row => { console.log(row,'操作三') }
+              handleClick: row => { console.log(row, '操作三') }
             }]
           }, {
             key: 'data4',
             label: '编辑',
-            type:'slot',
+            type: 'slot',
             slot: 'slot2'
           }]
         },
-        pagination: {
-          pageIndex: 1,
-          pageSize: 2,
-          totalCount: 6,
-        }
+        pagination: true
       }
     }
   },

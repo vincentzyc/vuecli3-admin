@@ -1,7 +1,6 @@
 <template>
   <div class="base-tabel">
-    
-    <el-form ref="formData" :model="formData" :inline="true" size="small" class="mg-t20">
+    <el-form :model="formData" :inline="true" size="small" class="mg-t20" v-if="baseData.hasOwnProperty('condition')">
       <el-form-item v-for="(item,key) in baseData.condition" :label="item.label" :key="key">
         <el-date-picker
           v-if="item.type==='datePicker'"
@@ -22,18 +21,11 @@
       </el-form-item>
     </el-form>
 
-    <el-table :data="baseData.table.list" stripe tooltip-effect="light" border class="mg-t20">
-      <el-table-column label="序号" align="center" type="index" :index="showTableIndex(baseData.pagination.pageIndex,baseData.pagination.pageSize)" width="55"></el-table-column>
-      <el-table-column
-        v-for="(column,key) in baseData.table.columns"
-        :key="key"
-        :prop="column.key"
-        :label="column.label"
-        align="center"
-        :show-overflow-tooltip="true"
-      >
+    <el-table ref="elTable" :data="baseData.table.list" stripe tooltip-effect="light" border class="mg-t20" v-if="baseData.hasOwnProperty('table')">
+      <el-table-column label="序号" align="center" type="index" :index="showTableIndex(formData.pageIndex,formData.pageSize)" width="55"></el-table-column>
+      <el-table-column v-for="(column,key) in baseData.table.columns" :key="key" :prop="column.key" :label="column.label" align="center">
         <template slot-scope="{row}">
-          <template v-if="column.type==='text'">{{ row[column.key] }}</template>
+          <template v-if="!column.hasOwnProperty('type')">{{ row[column.key] }}</template>
           <template v-if="column.type==='format'">
             <span v-html="column.format(row)"></span>
           </template>
@@ -47,17 +39,16 @@
       </el-table-column>
     </el-table>
 
-    <div class="pull-right mg-t20 mg-b20" v-if="baseData.table.list.length>0&&baseData.hasOwnProperty('pagination')">
+    <div class="pull-right mg-t20 mg-b20" v-if="baseData.table.list.length>0&&baseData.pagination">
       <el-pagination
         @current-change="handleCurrentChange"
         @size-change="handleSizeChange"
-        :current-page="baseData.pagination.pageIndex||1"
         :page-sizes="[10, 20, 50, 100]"
-        :page-size="baseData.pagination.pageSize||10"
-        :total="baseData.pagination.totalCount||0"
-        :layout="baseData.pagination.layout||'total, sizes, prev, pager, next, jumper'"
+        :current-page="formData.pageIndex||1"
+        :page-size="formData.pageSize||10"
+        :total="formData.totalCount||0"
+        :layout="formData.layout||'total, sizes, prev, pager, next, jumper'"
       ></el-pagination>
-
     </div>
   </div>
 </template>
@@ -92,15 +83,22 @@ export default {
       this.formData[item.endKey] = this.formData[item.key] ? this.formData[item.key][1] : "";
     },
     handleSizeChange(val) {
-      console.log(val);
-      // this.$emit("getList", 1, val);//切换条数的时候回到第一页
+      console.log('每页显示条数', val);
+      this.$emit('update:formData', {
+        pageIndex: 1,
+        pageSize: val,
+        ...this.formData
+      })
+      this.$emit('getList')
     },
     handleCurrentChange(val) {
-      console.log(val);
-      // this.$emit("getList", val, this.pageSize);
+      console.log('页码数', val);
+      this.$emit('update:formData', {
+        pageIndex: val,
+        ...this.formData
+      })
+      this.$emit('getList')
     }
-  },
-  created() {
   }
 };
 </script>
