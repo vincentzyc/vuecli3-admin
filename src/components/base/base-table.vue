@@ -70,34 +70,26 @@ export default {
       required: true
     }
   },
-  data() {
-    return {
-
-    }
-  },
   methods: {
     showTableIndex(pageIndex = 1, pageSize = 10) {
-      var index = 0;
-      return (pageIndex - 1) * pageSize + index + 1;
+      return (pageIndex - 1) * pageSize + 1;
     },
     getDate(item) {
       this.formData[item.startKey] = this.formData[item.key] ? this.formData[item.key][0] : "";
       this.formData[item.endKey] = this.formData[item.key] ? this.formData[item.key][1] : "";
     },
     handleSizeChange(val) {
-      console.log('每页显示条数', val);
       this.$emit('update:formData', {
+        ...this.formData,
         pageIndex: 1,
-        pageSize: val,
-        ...this.formData
+        pageSize: val
       })
       this.$emit('getList')
     },
     handleCurrentChange(val) {
-      console.log('页码数', val);
       this.$emit('update:formData', {
-        pageIndex: val,
-        ...this.formData
+        ...this.formData,
+        pageIndex: val
       })
       this.$emit('getList')
     }
