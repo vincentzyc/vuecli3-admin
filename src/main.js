@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
-import '@/assets/css/base.css'
+import './assets/css/base.css'
 import Api from './assets/js/api';
 import BaseComponents from "./components/base";
 
