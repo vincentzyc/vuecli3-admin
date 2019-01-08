@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BaseTable ref="baseTable" :baseData="baseData" :formData.sync="formData" @getList="handleSearch">
+    <BaseTable :baseData="baseData" :formData.sync="formData" @getList="handleSearch">
       <template slot="slot1">
         <el-button type="primary" size="small" @click="test1()">测试测试</el-button>
       </template>
@@ -24,6 +24,8 @@ export default {
   data() {
     return {
       formData: {
+        filterStartTime: "2019-01-01",  //设置默认值
+        filterEndTime: "2019-01-06",  //设置默认值
         filterStartAndEndTime: ["2019-01-01", "2019-01-06"], //设置默认值
         pageIndex: 1,
         pageSize: 2,
@@ -125,7 +127,7 @@ export default {
       console.log('2222222222222');
     },
     test1() {
-      console.log(this.$refs.baseTable.formData);
+      console.log(this.formData);
     },
     handleView(command) {
       console.log(command);
