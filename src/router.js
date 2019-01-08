@@ -15,32 +15,32 @@ const router = new Router({
 		{
 			path: "/login",
 			name: 'login',
-			component: () => import("@/views/login.vue")
+			component: () => import("./views/login.vue")
 		},
 		{
 			path: "/home",
-			component: () => import("@/components/layout"),
+			component: () => import("./components/layout"),
 			children: [{
 					path: '/',
 					name: 'home',
-					component: () => import('@/views/home.vue')
+					component: () => import('./views/home.vue')
 				},
 				{
 					path: '/ad',
 					name: 'ad',
-					component: () => import('@/views/ad.vue')
+					component: () => import('./views/ad.vue')
 				},
 				{
 					path: '/basetabel',
 					name: 'basetabel',
-					component: () => import('@/views/basetabel.vue')
+					component: () => import('./views/basetabel.vue')
 				}
 			]
 		},
 		{
 			path: '*',
 			name: '404',
-			component: () => import("@/views/404.vue")
+			component: () => import("./views/404.vue")
 		}
 	]
 })
