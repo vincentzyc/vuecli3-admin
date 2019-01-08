@@ -1,5 +1,5 @@
 import BasePage from './base-page'; //页面组件
-import BaseTable from './base-table'; //页面组件
+import BaseTable from './base-table'; //基础表格组件
 
 const version = '1.0';
 const install = function(Vue) {
@@ -7,7 +7,7 @@ const install = function(Vue) {
 	if (install.installed) return;
 
 	Vue.component(BasePage.name, BasePage); //注册组件
-	Vue.component(BaseTable.name, BaseTable); //注册组件
+	Vue.component(BaseTable.name, BaseTable); 
 
 };
 
