@@ -24,7 +24,14 @@
     </el-form>
 
     <el-table :data="baseData.table.list" stripe tooltip-effect="light" border class="mg-t20" v-if="baseData.hasOwnProperty('table')">
-      <el-table-column label="序号" align="center" type="index" :index="showTableIndex(formData.pageIndex,formData.pageSize)" width="55"></el-table-column>
+      <el-table-column
+        label="序号"
+        align="center"
+        type="index"
+        :index="showTableIndex(formData.pageIndex,formData.pageSize)"
+        width="55"
+        v-if="baseData.pagination!==false"
+      ></el-table-column>
       <el-table-column v-for="column in baseData.table.columns" :key="column.key+column.label" :prop="column.key" :label="column.label" align="center">
         <template slot-scope="{row}">
           <template v-if="!column.hasOwnProperty('type')">{{ row[column.key] }}</template>
