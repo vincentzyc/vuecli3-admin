@@ -117,8 +117,8 @@ export default {
             type: 'slot',
             slot: 'slot2'
           }]
-        },
-        pagination: true
+        }
+        // pagination: false  //设置为false则不显示分页， 无此字段或不为false则显示分页，
       }
     }
   },

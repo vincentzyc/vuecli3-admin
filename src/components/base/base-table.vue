@@ -2,7 +2,7 @@
   <div class="base-tabel">
     <el-form :model="formData" :inline="true" size="small" class="relative mg-t20" v-if="baseData.hasOwnProperty('condition')">
       <template v-for="(item,key) in baseData.condition">
-        <el-form-item :label="item.label" :key="key">
+        <el-form-item :label="item.label?item.label+'：':''" :key="key" v-if="item.type!=='slot'">
           <el-date-picker
             v-if="item.type==='datePicker'"
             v-model="formData[item.key]"
@@ -13,19 +13,19 @@
             @change="getDate(item)"
             size="small"
           ></el-date-picker>
-          <el-input v-if="item.type==='input'" v-model="formData[item.key]" placeholder="请输入" size="small"></el-input>
-          <el-select v-if="item.type==='select'" v-model="formData[item.key]" placeholder="请选择" size="small">
+          <el-input v-if="item.type==='input'" v-model="formData[item.key]" :placeholder="'请输入'+item.label" size="small"></el-input>
+          <el-select v-if="item.type==='select'" v-model="formData[item.key]" :placeholder="'请选择'+item.label" size="small">
             <el-option v-for="option in item.options" :label="option.label" :value="option.value" :key="option.value"></el-option>
           </el-select>
           <el-button v-if="item.type==='button'" type="primary" size="small" @click="item.handleClick()">{{item.text}}</el-button>
         </el-form-item>
-        <slot v-if="item.type==='slot'" :name="item.slot"></slot>
+        <slot v-else :name="item.slot"></slot>
       </template>
     </el-form>
 
-    <el-table ref="elTable" :data="baseData.table.list" stripe tooltip-effect="light" border class="mg-t20" v-if="baseData.hasOwnProperty('table')">
+    <el-table :data="baseData.table.list" stripe tooltip-effect="light" border class="mg-t20" v-if="baseData.hasOwnProperty('table')">
       <el-table-column label="序号" align="center" type="index" :index="showTableIndex(formData.pageIndex,formData.pageSize)" width="55"></el-table-column>
-      <el-table-column v-for="(column,key) in baseData.table.columns" :key="key" :prop="column.key" :label="column.label" align="center">
+      <el-table-column v-for="column in baseData.table.columns" :key="column.key+column.label" :prop="column.key" :label="column.label" align="center">
         <template slot-scope="{row}">
           <template v-if="!column.hasOwnProperty('type')">{{ row[column.key] }}</template>
           <template v-if="column.type==='format'">
@@ -41,7 +41,7 @@
       </el-table-column>
     </el-table>
 
-    <div class="pull-right mg-t20 mg-b20" v-if="baseData.table.list.length>0&&baseData.pagination">
+    <div class="pull-right mg-t20 mg-b20" v-if="baseData.table.list.length>0&&baseData.pagination!==false">
       <el-pagination
         @current-change="handleCurrentChange"
         @size-change="handleSizeChange"
