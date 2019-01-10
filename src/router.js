@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const vue = new Vue();
+const vm = new Vue();
+
 Vue.use(Router)
 
 const checkLogin = () => localStorage.getItem("loanuser") ? "/home" : "/login"
@@ -54,7 +55,7 @@ router.beforeEach((to, from, next) => {
 })
 router.afterEach(() => {
 	if (window.dom_container) {
-		vue.$api.easeout(window.dom_container, 0, 5);
+		vm.$util.easeout(window.dom_container, 0, 5);
 	}
 })
 

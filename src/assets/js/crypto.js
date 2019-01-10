@@ -7,7 +7,7 @@ const iv = utf8.parse("qwertyuiop123456");
 const mode = CryptoJS.mode.CBC;
 const padding = require("crypto-js/pad-pkcs7");
 
-const default_key = "junbokey12345678";
+const default_key = "vincent12345678";
 
 export default {
   encrypt(data, key) {
