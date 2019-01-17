@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './plugins/element.js'
+import "./plugins/axios";
 import './assets/css/base.css'
 import './assets/js';
 import BaseComponents from "./components/base";

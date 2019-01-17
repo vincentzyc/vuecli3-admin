@@ -3,6 +3,7 @@
     <BaseTable :baseData="baseData" :formData.sync="formData" @getList="handleSearch">
       <template slot="slot1">
         <el-button type="primary" size="small" @click="test1()">测试测试</el-button>
+        <el-button type="primary" size="small" @click="loginCheck()">接口测试</el-button>
       </template>
       <template slot="slot2" slot-scope="{row}">
         <el-dropdown :hide-on-click="false" @command="handleView">
@@ -128,6 +129,10 @@ export default {
     },
     test1() {
       console.log(this.formData);
+    },
+    async loginCheck() {
+      let res = await this.$api.ApiModule1.loginCheck({ UserName: "123", PassWord: "456" });
+      console.log(res);
     },
     handleView(command) {
       console.log(command);
