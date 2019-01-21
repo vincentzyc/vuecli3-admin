@@ -8,7 +8,7 @@ Vue.use(Router)
 const checkLogin = () => localStorage.getItem("loanuser") ? "/home" : "/login"
 
 const router = new Router({
-	mode: 'history',
+	// mode: 'history',
 	routes: [{
 			path: "/",
 			redirect: checkLogin()
