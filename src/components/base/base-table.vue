@@ -1,6 +1,6 @@
 <template>
   <div class="base-tabel">
-    <el-form :model="formData" :inline="true" size="small" class="relative mg-t20" v-if="baseData.hasOwnProperty('condition')">
+    <el-form :model="formData" :inline="true" size="small" class="relative" v-if="baseData.hasOwnProperty('condition')">
       <template v-for="(item,key) in baseData.condition">
         <el-form-item :label="item.label?item.label+'：':''" :key="key" v-if="item.type!=='slot'">
           <el-date-picker

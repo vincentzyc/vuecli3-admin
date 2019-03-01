@@ -7,12 +7,8 @@
       <v-sidebar></v-sidebar>
     </div>
     <div id="container">
-      <div
-        class="handle-sidebar"
-        :class="showSidebar?'el-icon-caret-left':'el-icon-caret-right'"
-        @click="toggleSidebar()"
-      ></div>
-      <div style="min-width: 1100px;">
+      <div class="handle-sidebar" :class="showSidebar?'el-icon-caret-left':'el-icon-caret-right'" @click="toggleSidebar()"></div>
+      <div style="min-width: 1100px;height:100%">
         <transition name="move" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -44,7 +40,7 @@ export default {
     }
   },
   mounted() {
-    this.$nextTick(function() {
+    this.$nextTick(function () {
       window.dom_container = document.getElementById("container");
     });
   }
@@ -69,7 +65,7 @@ export default {
   -ms-overflow-style: none;
 }
 
-::-webkit-scrollbar {
+.sidebar::-webkit-scrollbar {
   display: none;
 }
 
