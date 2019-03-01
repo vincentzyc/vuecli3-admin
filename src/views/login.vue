@@ -14,6 +14,7 @@
             @keyup.enter.native="submitForm('ruleForm')"
           ></el-input>
         </el-form-item>
+        <p style="color:#999;font-size:12px;margin:-10px 0 10px 0">用户名密码随意输入即可</p>
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </div>
