@@ -1,6 +1,7 @@
 <template>
   <div>
-    <BaseTable :baseData="baseData" :formData.sync="formData" @getList="handleSearch">
+    <!-- <BaseTable :condition="condition" :table="table" :pagination="false" :formData.sync="formData" @getList="handleSearch"> -->
+    <BaseTable :condition="condition" :table="table" :formData.sync="formData" @getList="handleSearch">
       <template slot="slot1">
         <el-button type="primary" size="small" @click="test1()">测试测试</el-button>
         <el-button type="primary" size="small" @click="loginCheck()">接口测试</el-button>
@@ -32,94 +33,91 @@ export default {
         pageSize: 2,
         totalCount: 6,
       },
-      baseData: {
-        condition: [{
-          type: 'datePicker',
-          key: 'filterStartAndEndTime',
-          startKey: 'filterStartTime',
-          endKey: 'filterEndTime',
-          label: '起止时间：'
+      condition: [{
+        type: 'datePicker',
+        key: 'filterStartAndEndTime',
+        startKey: 'filterStartTime',
+        endKey: 'filterEndTime',
+        label: '起止时间：'
+      }, {
+        type: 'input',
+        key: 'modelName',
+        label: '输入框：'
+      }, {
+        type: 'select',
+        key: 'productType',
+        options: [{
+          label: '全部',
+          value: ''
         }, {
-          type: 'input',
-          key: 'modelName',
-          label: '输入框：'
+          label: 'API',
+          value: 'API'
         }, {
-          type: 'select',
-          key: 'productType',
-          options: [{
-            label: '全部',
-            value: ''
-          }, {
-            label: 'API',
-            value: 'API'
-          }, {
-            label: 'H5',
-            value: 'H5'
-          }],
-          label: '选择框：'
+          label: 'H5',
+          value: 'H5'
+        }],
+        label: '选择框：'
+      }, {
+        type: 'button',
+        text: '查询',
+        handleClick: () => {
+          console.log('11111111111');
+          this.handleSearch();
+        }
+      }, {
+        type: 'slot',
+        slot: 'slot1'
+      }],
+      table: {
+        list: [{
+          data1: '111',
+          data2: '111111',
         }, {
-          type: 'button',
-          text: '查询',
-          handleClick: () => {
-            console.log('11111111111');
-            this.handleSearch();
+          data1: '222',
+          data2: '222222',
+        }, {
+          data1: '333',
+          data2: '333333',
+        }, {
+          data1: '111',
+          data2: '111111',
+        }, {
+          data1: '222',
+          data2: '222222',
+        }, {
+          data1: '333',
+          data2: '333333',
+        }],
+        columns: [{
+          key: 'data1',
+          label: '标题1'
+        }, {
+          key: 'data2',
+          label: '标题2',
+          type: 'format',
+          format: row => {
+            return row.data2 + '%';
           }
         }, {
-          type: 'slot',
-          slot: 'slot1'
-        }],
-        table: {
-          list: [{
-            data1: '111',
-            data2: '111111',
+          key: 'data3',
+          label: '操作',
+          type: 'textBtn',
+          textBtn: [{
+            text: "操作一",
+            handleClick: row => { console.log(row, '操作一') }
           }, {
-            data1: '222',
-            data2: '222222',
+            text: "操作二",
+            handleClick: row => { console.log(row, '操作二') }
           }, {
-            data1: '333',
-            data2: '333333',
-          }, {
-            data1: '111',
-            data2: '111111',
-          }, {
-            data1: '222',
-            data2: '222222',
-          }, {
-            data1: '333',
-            data2: '333333',
-          }],
-          columns: [{
-            key: 'data1',
-            label: '标题1'
-          }, {
-            key: 'data2',
-            label: '标题2',
-            type: 'format',
-            format: row => {
-              return row.data2 + '%';
-            }
-          }, {
-            key: 'data3',
-            label: '操作',
-            type: 'textBtn',
-            textBtn: [{
-              text: "操作一",
-              handleClick: row => { console.log(row, '操作一') }
-            }, {
-              text: "操作二",
-              handleClick: row => { console.log(row, '操作二') }
-            }, {
-              text: "操作三",
-              handleClick: row => { console.log(row, '操作三') }
-            }]
-          }, {
-            key: 'data4',
-            label: '编辑',
-            type: 'slot',
-            slot: 'slot2'
+            text: "操作三",
+            handleClick: row => { console.log(row, '操作三') }
           }]
-        }
-        // pagination: false  //设置为false则不显示分页， 无此字段或不为false则显示分页，
+        }, {
+          key: 'data4',
+          label: '编辑',
+          type: 'slot',
+          slot: 'slot2'
+        }]
       }
     }
   },
