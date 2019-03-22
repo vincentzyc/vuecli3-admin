@@ -52,6 +52,7 @@ export default {
 .sidebar-menu {
   height: 100%;
   overflow-y: auto;
+  border: none
 }
 </style>
 

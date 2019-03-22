@@ -5,13 +5,11 @@ const vm = new Vue();
 
 Vue.use(Router)
 
-const checkLogin = () => localStorage.getItem("loanuser") ? "/home" : "/login"
-
 const router = new Router({
 	// mode: 'history',
 	routes: [{
 			path: "/",
-			redirect: checkLogin()
+			redirect: "/home"
 		},
 		{
 			path: "/login",
@@ -53,6 +51,7 @@ router.beforeEach((to, from, next) => {
 	}
 	localStorage.getItem("loanuser") ? next() : next('/login');
 })
+
 router.afterEach(() => {
 	if (window.dom_container) {
 		vm.$util.easeout(window.dom_container, 0, 5);
