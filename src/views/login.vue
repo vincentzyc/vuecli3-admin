@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="login-bg"></div>
-    <div class="login-form">
+    <div class="login-form zoomInDown slow">
       <h1 class="title">管理系统</h1>
       <div class="form">
         <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px">
