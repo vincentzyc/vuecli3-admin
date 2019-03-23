@@ -9,7 +9,12 @@
             <el-input v-model="ruleForm.userName" placeholder="请输入用户名"></el-input>
           </el-form-item>
           <el-form-item prop="passWord">
-            <el-input type="password" placeholder="请输入密码" v-model="ruleForm.passWord" @keyup.enter.native="submitForm('ruleForm')"></el-input>
+            <el-input
+              type="password"
+              placeholder="请输入密码"
+              v-model="ruleForm.passWord"
+              @keyup.enter.native="submitForm('ruleForm')"
+            ></el-input>
           </el-form-item>
           <p style="color:#999;font-size:12px;margin:-5px 0 10px 0">用户名密码随意输入即可</p>
           <div class="login-btn-wrap">
@@ -90,6 +95,7 @@ export default {
   color: #fff;
   margin-bottom: 30px;
   background-image: -webkit-linear-gradient(92deg, #d1451a, #ff9300);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
