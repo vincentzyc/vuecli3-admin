@@ -54,7 +54,7 @@ export default {
           },
           options: [{
             label: '全部',
-            value: ''
+            value: 'all'
           }, {
             label: 'API',
             value: 'API'
