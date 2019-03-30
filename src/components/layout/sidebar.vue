@@ -52,7 +52,11 @@ export default {
 .sidebar-menu {
   height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   border: none
+}
+.sidebar-menu::-webkit-scrollbar {
+  display: none;
 }
 </style>
 

@@ -33,6 +33,10 @@ const router = new Router({
 					path: '/basetabel',
 					name: 'basetabel',
 					component: () => import('./views/basetabel.vue')
+				}, {
+					path: '/tabs',
+					name: 'tabs',
+					component: () => import('./views/tabs')
 				}
 			]
 		},

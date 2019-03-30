@@ -65,10 +65,6 @@ export default {
   -ms-overflow-style: none;
 }
 
-.sidebar::-webkit-scrollbar {
-  display: none;
-}
-
 #container {
   background: none repeat scroll 0 0 #fff;
   position: absolute;
