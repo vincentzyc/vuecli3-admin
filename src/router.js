@@ -30,10 +30,11 @@ const router = new Router({
 					component: () => import('./views/ad.vue')
 				},
 				{
-					path: '/basetabel',
-					name: 'basetabel',
-					component: () => import('./views/basetabel.vue')
-				}, {
+					path: '/easytable',
+					name: 'easytable',
+					component: () => import('./views/ele-easy-table-demo.vue')
+				},
+				{
 					path: '/tabs',
 					name: 'tabs',
 					component: () => import('./views/tabs')

@@ -230,6 +230,9 @@ strong,
 .thin {
   font-weight: lighter;
 }
+.bold {
+	font-weight: bold;
+}
 .row {
   position: relative;
   width: 100%;

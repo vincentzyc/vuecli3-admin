@@ -6,11 +6,10 @@ import './plugins/element.js'
 import "./plugins/axios";
 import './assets/css/base.css'
 import './assets/js';
-import BaseComponents from "./components/base";
+import "./components/base";
+import "ele-easy-table"
 
 Vue.config.productionTip = false
-
-Vue.use(BaseComponents)
 
 new Vue({
 	router,

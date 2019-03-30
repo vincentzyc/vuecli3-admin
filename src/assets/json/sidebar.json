@@ -16,6 +16,6 @@
 		]
 	},
 	{ "index": "/ad", "title": "广告管理" },
-	{ "index": "/basetabel", "title": "表格组件" },
+	{ "index": "/easytable", "title": "表格组件" },
 	{ "index": "/tabs", "title": "标签页" }
 ]
