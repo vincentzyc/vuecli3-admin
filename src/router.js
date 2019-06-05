@@ -33,6 +33,11 @@ const router = new Router({
 					path: '/easytable',
 					name: 'easytable',
 					component: () => import('./views/ele-easy-table-demo.vue')
+				},
+				{
+					path: '/tabs',
+					name: 'tabs',
+					component: () => import('./views/tabs')
 				}
 			]
 		},

@@ -10,6 +10,7 @@
     </header>
     <main class="content">
       <slot name="content">{{content}}</slot>
+      <slot></slot>
     </main>
   </div>
 </template>

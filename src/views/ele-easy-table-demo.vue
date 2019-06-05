@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <ele-easy-table :form="form" :table="table" :pagination="false" :formData.sync="formData" @getList="handleSearch"> -->
     <ele-easy-table :form="form" :table="table" :formData.sync="formData" @getList="handleSearch">
       <template slot="slot1">
         <el-button type="primary" size="small" @click="test1()">测试测试</el-button>
@@ -33,26 +32,29 @@ export default {
         totalCount: 6,
       },
       form: {
-        style:{
-          background:'#f2f2f2',
-          padding:'20px 20px 0 20px'
+        style: {
+          background: '#f2f2f2',
+          paddingTop: '20px'
         },
         list: [{
           type: 'datePicker',
           key: 'filterStartAndEndTime',
           startKey: 'filterStartTime',
           endKey: 'filterEndTime',
-          label: '起止时间：'
+          label: '起止时间'
         }, {
           type: 'input',
           key: 'modelName',
-          label: '输入框：'
+          label: '输入框'
         }, {
           type: 'select',
           key: 'productType',
+          config: {
+            filterable: true
+          },
           options: [{
             label: '全部',
-            value: ''
+            value: 'all'
           }, {
             label: 'API',
             value: 'API'
@@ -60,7 +62,15 @@ export default {
             label: 'H5',
             value: 'H5'
           }],
-          label: '选择框：'
+          label: '选择框'
+        }, {
+          type: 'select',
+          key: 'productName',
+          config: {
+            filterable: true
+          },
+          options: ['产品名称1', '产品名称2', '产品名称3'],
+          label: '产品名称'
         }, {
           type: 'button',
           text: '查询',
@@ -76,26 +86,29 @@ export default {
       table: {
         list: [{
           data1: '111',
-          data2: '111111',
+          data2: '第111111',
         }, {
           data1: '222',
-          data2: '222222',
+          data2: '第222222',
         }, {
           data1: '333',
-          data2: '333333',
+          data2: '第333333',
         }, {
-          data1: '111',
-          data2: '111111',
+          data1: '444',
+          data2: '第4444444',
         }, {
-          data1: '222',
-          data2: '222222',
+          data1: '555',
+          data2: '第555555',
         }, {
-          data1: '333',
-          data2: '333333',
+          data1: '666',
+          data2: '第666666',
         }],
         columns: [{
           key: 'data1',
-          label: '标题1'
+          label: '标题1',
+          config: {
+            sortable: true
+          }
         }, {
           key: 'data2',
           label: '标题2',
@@ -139,4 +152,3 @@ export default {
   }
 }
 </script>
-
