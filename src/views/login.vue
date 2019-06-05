@@ -9,12 +9,7 @@
             <el-input v-model="ruleForm.userName" placeholder="请输入用户名"></el-input>
           </el-form-item>
           <el-form-item prop="passWord">
-            <el-input
-              type="password"
-              placeholder="请输入密码"
-              v-model="ruleForm.passWord"
-              @keyup.enter.native="submitForm('ruleForm')"
-            ></el-input>
+            <el-input type="password" placeholder="请输入密码" v-model="ruleForm.passWord" @keyup.enter.native="submitForm('ruleForm')"></el-input>
           </el-form-item>
           <p style="color:#999;font-size:12px;margin:-5px 0 10px 0">用户名密码随意输入即可</p>
           <div class="login-btn-wrap">
@@ -47,11 +42,8 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$util.setLStorage(
-            "loanuser",
-            { username: this.ruleForm.userName },
-            "decode"
-          );
+          console.log(11111);
+          this.$util.setLStorage("userInfo", { username: this.ruleForm.userName }, "decode");
           this.$router.push("/home");
         } else {
           console.log("error submit!!");
@@ -61,7 +53,7 @@ export default {
     }
   },
   created() {
-    let userInfo = this.$util.getLStorage("loanuser", "decode");
+    let userInfo = this.$util.getLStorage("userInfo", "decode");
     if (userInfo) {
       this.ruleForm.userName = userInfo.username;
     }

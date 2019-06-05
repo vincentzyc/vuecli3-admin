@@ -25,14 +25,14 @@ export default {
   },
   computed: {
     username() {
-      let userInfo = this.$util.getLStorage("loanuser", "decode");
+      let userInfo = this.$util.getLStorage("userInfo", "decode");
       return userInfo ? userInfo.username : this.name;
     }
   },
   methods: {
-    changePass() {},
+    changePass() { },
     loginout() {
-      window.localStorage.removeItem("loanuser");
+      window.localStorage.removeItem("userInfo");
       this.$router.replace("/login");
     }
   }
