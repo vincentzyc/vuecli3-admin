@@ -54,9 +54,9 @@
             :class="{'active':list[key]==='1'}"
             @mousedown="handleMousedown(key,$event)"
             @mouseup="handleMouseup(key,$event)"
-            @click="selectTime(key)"
+            @click="handleClick(key)"
           ></div>
-          <!-- @click="selectTime(key)" -->
+          <!-- @click="handleClick(key)" -->
           <!-- @mousemove="handleMousemove(key,$event)" -->
         </div>
       </div>
@@ -79,11 +79,13 @@ export default {
   data() {
     return {
       list: [],
-      isMove:false
+      timeRanges: 7 * 24 * 2,
+      isMove: false
     }
   },
   methods: {
-    selectTime(i) {
+    // moveSelectTime(i){},
+    handleClick(i) {
       let newData = this.list[i] === '1' ? '0' : '1';
       this.list.splice(i, 1, newData);
     },
@@ -95,19 +97,24 @@ export default {
       // })
     },
     // handleMousemove(i) {
-      // if(!this.isMove) return;
-      // this.selectTime(i);
+    // if(!this.isMove) return;
+    // this.selectTime(i);
     // },
     handleMouseup(i) {
       this.isMove = false;
       // this.selectTime(i);
     },
-    handleMouseleave(){
+    handleMouseleave() {
       this.isMove = false;
+    },
+    initList() {
+      for (let i = 0; i < this.timeRanges; i++) {
+        this.list[i] = '0'
+      }
     }
   },
   created() {
-    this.list = new Array(7 * 48);
+    this.initList();
   }
 }
 </script>
@@ -116,7 +123,7 @@ export default {
 .duration {
   font-size: 14px;
   line-height: 32px;
-  user-select: none
+  user-select: none;
 }
 
 .duration .duration-main {
