@@ -46,14 +46,18 @@
           <div class="week-item">星期六</div>
           <div class="week-item">星期日</div>
         </div>
-        <div class="time-body">
+        <div class="time-body" @mouseleave="handleMouseleave">
           <div
             v-for="(i,key) in 336"
             :key="key"
             class="time-cell"
             :class="{'active':list[key]==='1'}"
-            @click="select(key)"
+            @mousedown="handleMousedown(key,$event)"
+            @mouseup="handleMouseup(key,$event)"
+            @click="selectTime(key)"
           ></div>
+          <!-- @click="selectTime(key)" -->
+          <!-- @mousemove="handleMousemove(key,$event)" -->
         </div>
       </div>
     </div>
@@ -75,22 +79,35 @@ export default {
   data() {
     return {
       list: [],
+      isMove:false
     }
   },
   methods: {
-    select(i) {
-      console.log(this.list[i]);
-      this.list[i] = this.list[i] === '0' ? '1' : '0';
+    selectTime(i) {
+      let newData = this.list[i] === '1' ? '0' : '1';
+      this.list.splice(i, 1, newData);
     },
-    initList() {
-      for (let index = 0; index < 336; index++) {
-        this.list.push('1')
-      }
+    handleMousedown(i, event) {
+      this.isMove = true;
+      // console.log(event.target.parentNode);
+      // event.target.addEventListener('mousemove', (i, e) => {
+      //   this.selectTime(i);
+      // })
+    },
+    // handleMousemove(i) {
+      // if(!this.isMove) return;
+      // this.selectTime(i);
+    // },
+    handleMouseup(i) {
+      this.isMove = false;
+      // this.selectTime(i);
+    },
+    handleMouseleave(){
+      this.isMove = false;
     }
   },
   created() {
-    this.initList();
-    console.log(this.list);
+    this.list = new Array(7 * 48);
   }
 }
 </script>
@@ -99,6 +116,7 @@ export default {
 .duration {
   font-size: 14px;
   line-height: 32px;
+  user-select: none
 }
 
 .duration .duration-main {
