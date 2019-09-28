@@ -17,5 +17,6 @@
 	},
 	{ "index": "/ad", "title": "广告管理" },
 	{ "index": "/easytable", "title": "表格组件" },
-	{ "index": "/tabs", "title": "标签页" }
+  { "index": "/tabs", "title": "标签页" },
+  { "index": "/time-range-picker", "title": "多段时间选择" }
 ]
