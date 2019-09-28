@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       list: [],
-      timeRanges: 7 * 24 * 2,
+      timeSlots: 7 * 24 * 2,
       isMove: false
     }
   },
@@ -108,7 +108,7 @@ export default {
       this.isMove = false;
     },
     initList() {
-      for (let i = 0; i < this.timeRanges; i++) {
+      for (let i = 0; i < this.timeSlots; i++) {
         this.list[i] = '0'
       }
     }
