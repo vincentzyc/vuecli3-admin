@@ -9,30 +9,7 @@
             <div class="duration-date-range">12:00 - 24:00</div>
           </div>
           <div class="duration-hd-con-bottom">
-            <span class="duration-date-cell">0</span>
-            <span class="duration-date-cell">1</span>
-            <span class="duration-date-cell">2</span>
-            <span class="duration-date-cell">3</span>
-            <span class="duration-date-cell">4</span>
-            <span class="duration-date-cell">5</span>
-            <span class="duration-date-cell">6</span>
-            <span class="duration-date-cell">7</span>
-            <span class="duration-date-cell">8</span>
-            <span class="duration-date-cell">9</span>
-            <span class="duration-date-cell">10</span>
-            <span class="duration-date-cell">11</span>
-            <span class="duration-date-cell">12</span>
-            <span class="duration-date-cell">13</span>
-            <span class="duration-date-cell">14</span>
-            <span class="duration-date-cell">15</span>
-            <span class="duration-date-cell">16</span>
-            <span class="duration-date-cell">17</span>
-            <span class="duration-date-cell">18</span>
-            <span class="duration-date-cell">19</span>
-            <span class="duration-date-cell">20</span>
-            <span class="duration-date-cell">21</span>
-            <span class="duration-date-cell">22</span>
-            <span class="duration-date-cell">23</span>
+            <span class="duration-date-cell" v-for="hour in 24" :key="hour">{{hour-1}}</span>
           </div>
         </div>
       </div>
@@ -40,7 +17,7 @@
         <div class="week-body">
           <div v-for="week in weeks" :key="week" class="week-item">{{week}}</div>
         </div>
-        <div class="time-body" @mousedown="handleMousedown" @mouseup="handleMouseup">
+        <div class="time-body" @mousedown="handleMousedown" @mouseup="handleMouseup" @mousemove="handleMousemove">
           <el-tooltip
             v-for="(i,key) in timeSlots"
             :key="key"
@@ -48,9 +25,9 @@
             effect="dark"
             :content="tiptxt(key)"
             placement="top"
-            :open-delay="666"
+            :open-delay="800"
           >
-            <div class="time-cell" :class="{'active':list[key]==='1'}"></div>
+            <div class="time-cell" :class="{'active':list[key]==='1','pre-active':preViewIndex.includes(key)}"></div>
           </el-tooltip>
         </div>
       </div>
@@ -75,12 +52,14 @@ export default {
   },
   data() {
     return {
+      isMove: false,
       list: [],
       timeSlots: 7 * 24 * 2,
       timeTextList: [],
       weeks: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
       selectIndex: [],
-      axis: {}
+      preAxis: {},
+      preViewIndex: [],
     }
   },
   watch: {
@@ -99,7 +78,7 @@ export default {
       let weekIndex = ~~(index / 48);
       return `${this.weeks[weekIndex]} ${this.timeTextList[timeIndex]}~${this.timeTextList[timeIndex + 1]}`
     },
-    initTime() {
+    initTimeText() {
       let timeTextList = [], hours = [], minutes = ['00', '30'];
       for (let i = 0; i <= 24; i++) {
         i < 10 ? hours.push('0' + i) : hours.push(i.toString())
@@ -112,15 +91,24 @@ export default {
       this.timeTextList = timeTextList
     },
     handleMousedown(event) {
+      this.isMove = true;
       let index = event.target.getAttribute('data-index');
-      this.axis.startx = index % 48;
-      this.axis.starty = ~~(index / 48);
+      this.preAxis.startx = index % 48;
+      this.preAxis.starty = ~~(index / 48);
     },
     handleMouseup(event) {
       let index = event.target.getAttribute('data-index');
-      this.axis.endx = index % 48;
-      this.axis.endy = ~~(index / 48);
-      this.selectIndex = this.getSelectIndex(this.axis)
+      this.preAxis.endx = index % 48;
+      this.preAxis.endy = ~~(index / 48);
+      this.preViewIndex = this.getSelectIndex(this.preAxis);
+      this.resetMousemove()
+    },
+    handleMousemove(event) {
+      if (!this.isMove) return;
+      let index = event.target.getAttribute('data-index');
+      this.preAxis.endx = index % 48;
+      this.preAxis.endy = ~~(index / 48);
+      this.preViewIndex = this.getSelectIndex(this.preAxis)
     },
     getSelectIndex(axis) {
       let arr = [],
@@ -137,6 +125,12 @@ export default {
       }
       return arr
     },
+    resetMousemove() {
+      this.selectIndex = this.preViewIndex;
+      this.isMove = false;
+      this.preAxis = {};
+      this.preViewIndex = [];
+    },
     initList(value) {
       if (value) {
         let reg = new RegExp("^[01]{" + this.timeSlots + "}$");
@@ -149,138 +143,15 @@ export default {
       this.$emit('input', this.list.join(''));
     }
   },
+  destroyed() {
+    document.removeEventListener('mouseup', this.resetMousemove)
+  },
   created() {
     this.initList(this.value);
-    this.initTime()
+    this.initTimeText();
+    document.addEventListener('mouseup', this.resetMousemove)
   }
 }
 </script>
 
 <style scoped>
-.duration {
-  font-size: 14px;
-  line-height: 32px;
-  color: #515a6e;
-  user-select: none;
-}
-.duration .duration-main {
-  border: 1px solid #dcdee2;
-  position: relative;
-  width: 658px;
-}
-.duration .duration-hd {
-  display: flex;
-  background: #f8f8f9;
-}
-.duration .duration-hd-title {
-  display: flex;
-  align-items: center;
-  padding: 0 6px;
-  width: 80px;
-  height: 65px;
-  font-weight: 700;
-}
-.duration .duration-hd-con {
-  flex: 1;
-  display: flex;
-  -webkit-box-orient: vertical;
-  flex-direction: column;
-}
-.duration .duration-hd-con-top {
-  display: flex;
-  border-bottom: 1px solid #dcdee2;
-}
-.duration .duration-date-range {
-  width: 288px;
-  height: 32px;
-  line-height: 32px;
-  text-align: center;
-  border-left: 1px solid #dcdee2;
-  font-weight: 700;
-}
-.duration .duration-hd-con-bottom {
-  display: flex;
-}
-.duration .duration-date-cell {
-  width: 24px;
-  height: 32px;
-  line-height: 32px;
-  text-align: center;
-  border-left: 1px solid #dcdee2;
-}
-.duration .duration-bd {
-  display: flex;
-}
-.duration .week-body {
-  width: 80px;
-  flex-shrink: 0;
-}
-.duration .week-item {
-  border-top: 1px solid #dcdee2;
-  text-align: center;
-  height: 30px;
-  line-height: 30px;
-  font-weight: 700;
-}
-.duration .time-body {
-  width: 576px;
-  height: 210px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  position: relative;
-}
-.duration .time-cell {
-  width: 12px;
-  height: 30px;
-  border-left: 1px solid #efefef;
-  border-top: 1px solid #efefef;
-  overflow: hidden;
-  transition: background 0.2s;
-  outline-width: 0;
-}
-.duration .time-cell.active {
-  background: #2d8cf0;
-}
-.time-area {
-  width: 576px;
-  height: 210px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  background: transparent;
-}
-.duration .duration-help {
-  display: flex;
-  align-items: center;
-  width: 658px;
-  justify-content: space-between;
-}
-.duration .duration-help-bd {
-  display: flex;
-  align-items: center;
-  -webkit-box-pack: start;
-  -ms-flex-pack: start;
-  justify-content: flex-start;
-  padding: 4px 0;
-}
-.duration .duration-help .color-box {
-  width: 14px;
-  height: 20px;
-  background: #fff;
-  border: 1px solid #dddddd;
-  display: block;
-  margin-right: 6px;
-}
-.duration .duration-help-bd .color-box.color-active {
-  background: #2d8cf0;
-}
-.duration .duration-help .text-box {
-  margin-right: 15px;
-}
-.duration .duration-help .duration-help-ft {
-  color: #2d8cf0;
-  cursor: pointer;
-}
-</style>
