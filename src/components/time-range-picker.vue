@@ -58,6 +58,7 @@ export default {
       timeTextList: [],
       weeks: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
       selectIndex: [],
+      startIndex:0,
       preAxis: {},
       preViewIndex: [],
     }
@@ -65,7 +66,7 @@ export default {
   watch: {
     selectIndex(newValue) {
       let valueLength = newValue.length;
-      let newData = this.list[newValue[0]] === '1' ? '0' : '1';
+      let newData = this.list[this.startIndex] === '1' ? '0' : '1';
       for (let i = 0; i < valueLength; i++) {
         this.list.splice(newValue[i], 1, newData);
         this.$emit('input', this.list.join(''));
@@ -92,15 +93,12 @@ export default {
     },
     handleMousedown(event) {
       this.isMove = true;
-      let index = event.target.getAttribute('data-index');
-      this.preAxis.startx = index % 48;
-      this.preAxis.starty = ~~(index / 48);
+      this.startIndex = event.target.getAttribute('data-index');
+      this.preAxis.startx = this.startIndex % 48;
+      this.preAxis.starty = ~~(this.startIndex / 48);
     },
     handleMouseup(event) {
-      let index = event.target.getAttribute('data-index');
-      this.preAxis.endx = index % 48;
-      this.preAxis.endy = ~~(index / 48);
-      this.preViewIndex = this.getSelectIndex(this.preAxis);
+      this.handleMousemove(event);
       this.resetMousemove()
     },
     handleMousemove(event) {
