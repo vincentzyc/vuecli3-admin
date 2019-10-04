@@ -5,9 +5,13 @@ import store from './store'
 import './plugins/element.js'
 import "./plugins/axios";
 import './assets/css/base.css'
-import './assets/js';
+import Api from './api';
+import Util from './utils';
 import "./components/base";
 import "ele-easy-table"
+
+Vue.prototype.$api = Api;
+Vue.prototype.$util = Util;
 
 Vue.config.productionTip = false
 
