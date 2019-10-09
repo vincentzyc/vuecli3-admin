@@ -33,13 +33,21 @@
       </div>
     </div>
     <div class="duration-help">
-      <div class="duration-help-bd">
-        <span class="color-box"></span>
-        <span class="text-box">未选</span>
-        <span class="color-box color-active"></span>
-        <span class="text-box">已选</span>
+      <div class="duration-help-tx">
+        <div class="duration-help-bd">
+          <span class="color-box"></span>
+          <span class="text-box">未选</span>
+          <span class="color-box color-active"></span>
+          <span class="text-box">已选</span>
+        </div>
+        <div class="duration-help-ft" @click="initList()">清空选择</div>
       </div>
-      <div class="duration-help-ft" @click="initList()">清空选择</div>
+      <div class="duration-help-select">
+        <p v-for="(week,key) in weeks" :key="key" v-show="allTimeText[key]">
+          <span class="duration-help-week-tx">{{week+"："}}</span>
+          <span>{{allTimeText[key]}}</span>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -57,20 +65,10 @@ export default {
       timeSlots: 7 * 24 * 2,
       timeTextList: [],
       weeks: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
-      selectIndex: [],
-      startIndex:0,
+      startIndex: 0,
       preAxis: {},
       preViewIndex: [],
-    }
-  },
-  watch: {
-    selectIndex(newValue) {
-      let valueLength = newValue.length;
-      let newData = this.list[this.startIndex] === '1' ? '0' : '1';
-      for (let i = 0; i < valueLength; i++) {
-        this.list.splice(newValue[i], 1, newData);
-        this.$emit('input', this.list.join(''));
-      }
+      allTimeText: []
     }
   },
   methods: {
@@ -123,31 +121,85 @@ export default {
       }
       return arr
     },
+    setSelectIndex(indexList) {
+      let valueLength = indexList.length;
+      let newData = this.list[this.startIndex] === '1' ? '0' : '1';
+      for (let i = 0; i < valueLength; i++) {
+        this.list.splice(indexList[i], 1, newData);
+        this.$emit('input', this.list.join(''));
+      }
+      this.showSelectTime(this.list);
+    },
+    showSelectTime(list) {
+      let weeksSelect = [], listlength = list.length;
+      this.allTimeText = [];
+      if (listlength === 0) return;
+      for (var i = 0; i < listlength; i += 48) {
+        weeksSelect.push(list.slice(i, i + 48));
+      }
+      weeksSelect.forEach(item => {
+        this.allTimeText.push(this.getTimeText(item))
+      });
+    },
+    getTimeText(arrTime) {
+      let timeLength = arrTime.length,
+        isSelect = false,
+        textTimeIndex = [],
+        timeText = "";
+
+      arrTime.forEach((value, index) => {
+        if (value === '1') {
+          if (!isSelect) {
+            textTimeIndex.push(index);
+            isSelect = true;
+          }
+          if (index === timeLength - 1) textTimeIndex.push(index + 1);
+        } else {
+          if (isSelect) {
+            textTimeIndex.push(index);
+            isSelect = false;
+          }
+        }
+      })
+
+      textTimeIndex.forEach((item, index) => {
+        if (index % 2 === 1) {
+          timeText += '~' + this.timeTextList[item] + '、'
+        } else {
+          timeText += this.timeTextList[item]
+        }
+      });
+
+      return timeText.slice(0, -1)
+    },
     resetMousemove() {
-      this.selectIndex = this.preViewIndex;
+      if (!this.isMove) return;
+      this.setSelectIndex(this.preViewIndex);
       this.isMove = false;
       this.preAxis = {};
       this.preViewIndex = [];
     },
     initList(value) {
-      if (value) {
-        let reg = new RegExp("^[01]{" + this.timeSlots + "}$");
-        if (reg.test(value)) return this.list = value.split('');
+      let reg = new RegExp("^[01]{" + this.timeSlots + "}$");
+      if (value && reg.test(value)) {
+        this.list = value.split('');
+        return this.showSelectTime(this.list);
       }
       this.list = [];
       for (let i = 0; i < this.timeSlots; i++) {
         this.list[i] = '0';
       }
       this.$emit('input', this.list.join(''));
+      this.showSelectTime(this.list);
     }
   },
   destroyed() {
     document.removeEventListener('mouseup', this.resetMousemove)
   },
   created() {
-    this.initList(this.value);
     this.initTimeText();
-    document.addEventListener('mouseup', this.resetMousemove)
+    document.addEventListener('mouseup', this.resetMousemove);
+    this.initList(this.value);
   }
 }
 </script>
@@ -264,11 +316,21 @@ export default {
   background: transparent;
 }
 .duration .duration-help {
+  width: 658px;
+  border: 1px solid #dcdee2;
+  border-top: none;
+  padding: 5px 15px;
+}
+.duration .duration-help-tx {
   display: flex;
   align-items: center;
-  width: 658px;
   justify-content: space-between;
 }
+
+.duration .duration-help-week-tx {
+  color: #999;
+}
+
 .duration .duration-help-bd {
   display: flex;
   align-items: center;
