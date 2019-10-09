@@ -30,9 +30,9 @@ export default [{
 				name: 'tabs',
 				component: () => import('@/views/tabs')
 			}, {
-				path: '/time-range-picker',
-				name: 'timeRangePicker',
-				component: () => import('@/views/time-range-picker-demo')
+				path: '/byte-weektime-picker',
+				name: 'byteWeektimePicker',
+				component: () => import('@/views/byte-weektime-picker-demo')
 			}
 		]
 	},
