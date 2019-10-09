@@ -1,18 +1,18 @@
 <template>
   <div>
     <h1 class="mg-b20">多段时间范围选择器</h1>
-    <TimeRangePicker v-model="timeList" />
+    <ByteWeektimePicker v-model="timeList" />
     <p style="word-wrap: break-word;margin-top:30px;line-height:24px">绑定值：{{timeList}}</p>
   </div>
 </template>
 
 <script>
-import TimeRangePicker from "@/components/time-range-picker.vue";
+import ByteWeektimePicker from "@/components/byte-weektime-picker.vue";
 
 export default {
-  name: "timeRangePickerDemo",
+  name: "ByteWeektimePickerDemo",
   components: {
-    TimeRangePicker
+    ByteWeektimePicker
   },
   data() {
     return {

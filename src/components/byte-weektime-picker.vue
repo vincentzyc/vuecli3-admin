@@ -1,19 +1,19 @@
 <template>
-  <div class="duration">
-    <div class="duration-main">
-      <div class="duration-hd">
-        <div class="duration-hd-title">星期\时间</div>
-        <div class="duration-hd-con">
-          <div class="duration-hd-con-top">
-            <div class="duration-date-range">00:00 - 12:00</div>
-            <div class="duration-date-range">12:00 - 24:00</div>
+  <div class="weektime">
+    <div class="weektime-main">
+      <div class="weektime-hd">
+        <div class="weektime-hd-title">星期\时间</div>
+        <div class="weektime-hd-con">
+          <div class="weektime-hd-con-top">
+            <div class="weektime-date-range">00:00 - 12:00</div>
+            <div class="weektime-date-range">12:00 - 24:00</div>
           </div>
-          <div class="duration-hd-con-bottom">
-            <span class="duration-date-cell" v-for="hour in 24" :key="hour">{{hour-1}}</span>
+          <div class="weektime-hd-con-bottom">
+            <span class="weektime-date-cell" v-for="hour in 24" :key="hour">{{hour-1}}</span>
           </div>
         </div>
       </div>
-      <div class="duration-bd">
+      <div class="weektime-bd">
         <div class="week-body">
           <div v-for="week in weeks" :key="week" class="week-item">{{week}}</div>
         </div>
@@ -32,19 +32,19 @@
         </div>
       </div>
     </div>
-    <div class="duration-help">
-      <div class="duration-help-tx">
-        <div class="duration-help-bd">
+    <div class="weektime-help">
+      <div class="weektime-help-tx">
+        <div class="weektime-help-bd">
           <span class="color-box"></span>
           <span class="text-box">未选</span>
           <span class="color-box color-active"></span>
           <span class="text-box">已选</span>
         </div>
-        <div class="duration-help-ft" @click="initList()">清空选择</div>
+        <div class="weektime-help-ft" @click="initList()">清空选择</div>
       </div>
-      <div class="duration-help-select">
+      <div class="weektime-help-select">
         <p v-for="(week,key) in weeks" :key="key" v-show="allTimeText[key]">
-          <span class="duration-help-week-tx">{{week+"："}}</span>
+          <span class="weektime-help-week-tx">{{week+"："}}</span>
           <span>{{allTimeText[key]}}</span>
         </p>
       </div>
@@ -54,7 +54,7 @@
 
 <script>
 export default {
-  name: "time-range-picker",
+  name: "byte-weektime-picker",
   props: {
     value: String
   },
@@ -205,22 +205,22 @@ export default {
 </script>
 
 <style scoped>
-.duration {
+.weektime {
   width: 658px;
   font-size: 14px;
   line-height: 32px;
   color: #515a6e;
   user-select: none;
 }
-.duration .duration-main {
+.weektime .weektime-main {
   border: 1px solid #dcdee2;
   position: relative;
 }
-.duration .duration-hd {
+.weektime .weektime-hd {
   display: flex;
   background: #f8f8f9;
 }
-.duration .duration-hd-title {
+.weektime .weektime-hd-title {
   display: flex;
   align-items: center;
   padding: 0 6px;
@@ -228,17 +228,17 @@ export default {
   height: 65px;
   font-weight: 700;
 }
-.duration .duration-hd-con {
+.weektime .weektime-hd-con {
   flex: 1;
   display: flex;
   -webkit-box-orient: vertical;
   flex-direction: column;
 }
-.duration .duration-hd-con-top {
+.weektime .weektime-hd-con-top {
   display: flex;
   border-bottom: 1px solid #dcdee2;
 }
-.duration .duration-date-range {
+.weektime .weektime-date-range {
   width: 288px;
   height: 32px;
   line-height: 32px;
@@ -246,31 +246,31 @@ export default {
   border-left: 1px solid #dcdee2;
   font-weight: 700;
 }
-.duration .duration-hd-con-bottom {
+.weektime .weektime-hd-con-bottom {
   display: flex;
 }
-.duration .duration-date-cell {
+.weektime .weektime-date-cell {
   width: 24px;
   height: 32px;
   line-height: 32px;
   text-align: center;
   border-left: 1px solid #dcdee2;
 }
-.duration .duration-bd {
+.weektime .weektime-bd {
   display: flex;
 }
-.duration .week-body {
+.weektime .week-body {
   width: 80px;
   flex-shrink: 0;
 }
-.duration .week-item {
+.weektime .week-item {
   border-top: 1px solid #dcdee2;
   text-align: center;
   height: 30px;
   line-height: 30px;
   font-weight: 700;
 }
-.duration .time-body {
+.weektime .time-body {
   width: 576px;
   height: 210px;
   display: flex;
@@ -278,7 +278,7 @@ export default {
   align-items: flex-start;
   position: relative;
 }
-.duration .time-cell {
+.weektime .time-cell {
   position: relative;
   width: 12px;
   height: 30px;
@@ -288,10 +288,10 @@ export default {
   transition: background 0.3s ease;
   outline-width: 0;
 }
-.duration .time-cell.active {
+.weektime .time-cell.active {
   background: #2d8cf0;
 }
-.duration .time-cell::after {
+.weektime .time-cell::after {
   content: "";
   position: absolute;
   top: 0;
@@ -303,7 +303,7 @@ export default {
   transition: background 888ms ease;
   z-index: 99999;
 }
-.duration .pre-active::after {
+.weektime .pre-active::after {
   background: #113860;
 }
 .time-area {
@@ -315,23 +315,23 @@ export default {
   z-index: 100;
   background: transparent;
 }
-.duration .duration-help {
+.weektime .weektime-help {
   width: 658px;
   border: 1px solid #dcdee2;
   border-top: none;
   padding: 5px 15px;
 }
-.duration .duration-help-tx {
+.weektime .weektime-help-tx {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.duration .duration-help-week-tx {
+.weektime .weektime-help-week-tx {
   color: #999;
 }
 
-.duration .duration-help-bd {
+.weektime .weektime-help-bd {
   display: flex;
   align-items: center;
   -webkit-box-pack: start;
@@ -339,7 +339,7 @@ export default {
   justify-content: flex-start;
   padding: 4px 0;
 }
-.duration .duration-help .color-box {
+.weektime .weektime-help .color-box {
   width: 14px;
   height: 20px;
   background: #fff;
@@ -347,13 +347,13 @@ export default {
   display: block;
   margin-right: 6px;
 }
-.duration .duration-help-bd .color-box.color-active {
+.weektime .weektime-help-bd .color-box.color-active {
   background: #2d8cf0;
 }
-.duration .duration-help .text-box {
+.weektime .weektime-help .text-box {
   margin-right: 15px;
 }
-.duration .duration-help .duration-help-ft {
+.weektime .weektime-help .weektime-help-ft {
   color: #2d8cf0;
   cursor: pointer;
 }
