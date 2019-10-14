@@ -19,7 +19,7 @@
         </div>
         <div class="time-body" @mousedown="handleMousedown" @mouseup="handleMouseup" @mousemove="handleMousemove">
           <el-tooltip
-            v-for="(i,key) in timeSlots"
+            v-for="(i,key) in weekTimes"
             :key="key"
             :data-index="key"
             effect="dark"
@@ -62,7 +62,7 @@ export default {
     return {
       isMove: false,
       list: [],
-      timeSlots: 7 * 24 * 2,
+      weekTimes: 7 * 24 * 2,
       timeTextList: [],
       weeks: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日'],
       startIndex: 0,
@@ -72,11 +72,18 @@ export default {
     }
   },
   methods: {
+    /**
+     * 鼠标停留时提示当前时间段
+     */
     tiptxt(index) {
       let timeIndex = index % 48;
       let weekIndex = ~~(index / 48);
       return `${this.weeks[weekIndex]} ${this.timeTextList[timeIndex]}~${this.timeTextList[timeIndex + 1]}`
     },
+    /**
+     * 初始化显示的时间数组
+     * ["00:00","00:30","01:00",...]
+     */
     initTimeText() {
       let timeTextList = [], hours = [], minutes = ['00', '30'];
       for (let i = 0; i <= 24; i++) {
@@ -106,6 +113,16 @@ export default {
       this.preAxis.endy = ~~(index / 48);
       this.preViewIndex = this.getSelectIndex(this.preAxis)
     },
+    resetMousemove() {
+      if (!this.isMove) return;
+      this.setSelectIndex(this.preViewIndex);
+      this.isMove = false;
+      this.preAxis = {};
+      this.preViewIndex = [];
+    },
+    /**
+     * 获取拖动鼠标选择的index数组
+     */
     getSelectIndex(axis) {
       let arr = [],
         newAxis = {
@@ -121,16 +138,21 @@ export default {
       }
       return arr
     },
+    /**
+     * 设置和展示选择的时间段并赋给绑定的值
+     */
     setSelectIndex(indexList) {
+      if (!Array.isArray(indexList)) return;
       let valueLength = indexList.length;
       let newData = this.list[this.startIndex] === '1' ? '0' : '1';
       for (let i = 0; i < valueLength; i++) {
         this.list.splice(indexList[i], 1, newData);
-        this.$emit('input', this.list.join(''));
       }
+      this.$emit('input', this.list.join(''));
       this.showSelectTime(this.list);
     },
     showSelectTime(list) {
+      if (!Array.isArray(list)) return;
       let weeksSelect = [], listlength = list.length;
       this.allTimeText = [];
       if (listlength === 0) return;
@@ -142,6 +164,7 @@ export default {
       });
     },
     getTimeText(arrTime) {
+      if (!Array.isArray(arrTime)) return "";
       let timeLength = arrTime.length,
         isSelect = false,
         textTimeIndex = [],
@@ -172,21 +195,14 @@ export default {
 
       return timeText.slice(0, -1)
     },
-    resetMousemove() {
-      if (!this.isMove) return;
-      this.setSelectIndex(this.preViewIndex);
-      this.isMove = false;
-      this.preAxis = {};
-      this.preViewIndex = [];
-    },
     initList(value) {
-      let reg = new RegExp("^[01]{" + this.timeSlots + "}$");
+      let reg = new RegExp("^[01]{" + this.weekTimes + "}$");
       if (value && reg.test(value)) {
         this.list = value.split('');
         return this.showSelectTime(this.list);
       }
       this.list = [];
-      for (let i = 0; i < this.timeSlots; i++) {
+      for (let i = 0; i < this.weekTimes; i++) {
         this.list[i] = '0';
       }
       this.$emit('input', this.list.join(''));
