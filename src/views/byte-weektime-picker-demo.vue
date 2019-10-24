@@ -1,13 +1,13 @@
 <template>
   <div>
-    <h1 class="mg-b20">多段时间范围选择器</h1>
+    <h1 class="mg-b20">多段时间选择器</h1>
     <ByteWeektimePicker v-model="timeList" />
     <p style="word-wrap: break-word;margin-top:30px;line-height:24px">绑定值：{{timeList}}</p>
   </div>
 </template>
 
 <script>
-import ByteWeektimePicker from "@/components/byte-weektime-picker.vue";
+import { ByteWeektimePicker } from 'byte-weektime-picker'
 
 export default {
   name: "ByteWeektimePickerDemo",
