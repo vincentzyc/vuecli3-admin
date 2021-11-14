@@ -1,18 +1,17 @@
 <template>
-  <div class="home text-center">
-    <img alt="Vue logo" src="@/assets/img/logo.png" @click="$router.push('/ad')">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="home">
+    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
   </div>
 </template>
 
-<script>
-// @ is an alias to /src
-import HelloWorld from "@/components/hello-world.vue";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
 
-export default {
-  name: "home",
+export default defineComponent({
+  name: 'Home',
   components: {
-    HelloWorld
-  }
-};
+    HelloWorld,
+  },
+});
 </script>
