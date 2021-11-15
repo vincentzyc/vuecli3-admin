@@ -1,6 +1,6 @@
 module.exports = {
-	publicPath: "./",
-	outputDir: "docs",
+  publicPath: "./",
+  outputDir: "docs",
   productionSourceMap: false,
   // configureWebpack: {
   //   // 以下库使用cdn，不会被打包
@@ -22,6 +22,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 8060
+    port: 8060,
+    proxy: 'http://test-cms-admin.jetmobo.com'
   }
 };
