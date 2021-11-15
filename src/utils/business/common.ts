@@ -1,11 +1,6 @@
 import { getUrlParam } from "../index";
 import { getType } from "../validate/dataType";
 
-export function initfingerprint2() {
-  const script = document.createElement("script");
-  script.src = 'https://cdn.lipush.com/other/js/fingerprint2@1.0.0.js';
-  document.head.appendChild(script);
-}
 /**
  * 获取当前链接参数值字符串||参数拼接后新跳转链接
  * @param {String} newUrl 需要拼接的链接

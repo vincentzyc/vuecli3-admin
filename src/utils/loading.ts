@@ -1,14 +1,13 @@
-import { Toast } from 'vant';
-
+import { ElLoading } from 'element-plus'
 export function openLoading(text?: string): void {
-  Toast.loading({
-    message: text || '',
-    duration: 0,       // 持续展示 toast
-    forbidClick: true, // 禁用背景点击
-    overlay: true,     //显示背景遮罩层
+  window.fullLoading = ElLoading.service({
+    lock: true,
+    text: text,
+    spinner: 'el-icon-loading',
+    background: 'rgba(0, 0, 0, 0.66)'
   });
 }
 
 export function closeLoading(): void {
-  Toast.clear();
+  if (window.fullLoading) window.fullLoading.close()
 }
