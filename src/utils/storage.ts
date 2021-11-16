@@ -1,6 +1,6 @@
 import { decrypt, encrypt } from "./business/crypto";
 
-export function setSessionStorage(key: string, value: any, encode: boolean): void {
+export function setSessionStorage(key: string, value: any, encode = false): void {
   let str = window.JSON.stringify(value);
   if (encode) {
     str = encrypt(str);
@@ -8,7 +8,7 @@ export function setSessionStorage(key: string, value: any, encode: boolean): voi
   window.sessionStorage.setItem(key, str);
 }
 
-export function getSessionStorage(key: string, decode: boolean): any {
+export function getSessionStorage(key: string, decode = false): any {
   let str: string | null;
   str = window.sessionStorage.getItem(key);
   if (!str) return "";
@@ -24,7 +24,7 @@ export function getSessionStorage(key: string, decode: boolean): any {
   }
 }
 
-export function setLocalStorage(key: string, value: any, encode: boolean): void {
+export function setLocalStorage(key: string, value: any, encode = false): void {
   let str = window.JSON.stringify(value);
   if (encode) {
     str = encrypt(str);
@@ -32,7 +32,7 @@ export function setLocalStorage(key: string, value: any, encode: boolean): void 
   window.localStorage.setItem(key, str);
 }
 
-export function getLocalStorage(key: string, decode: boolean): any {
+export function getLocalStorage(key: string, decode = false): any {
   let str: string | null;
   str = window.localStorage.getItem(key);
   if (!str) return "";

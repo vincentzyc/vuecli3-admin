@@ -1,17 +1,11 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+  <BasePage :paths="[111, 222]" showBack @handle-back="$router.back()">
+    <div class="jb-content">
+      <h1>asdfasdf</h1>
+    </div>
+  </BasePage>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-
-export default defineComponent({
-  name: 'Home',
-  components: {
-    HelloWorld,
-  },
-});
+<script lang="ts" setup>
+import BasePage from "@/components/BasePage/index.vue";
 </script>

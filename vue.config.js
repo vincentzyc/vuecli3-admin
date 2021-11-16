@@ -10,11 +10,11 @@ module.exports = {
   //   } : {}
   // },
 
-  configureWebpack: {
-    plugins: [
-      require('unplugin-vue-components/webpack')({ /* options */ }),
-    ],
-  },
+  // configureWebpack: {
+  //   plugins: [
+  //     require('unplugin-vue-components/webpack')({ /* options */ }),
+  //   ],
+  // },
 
   chainWebpack: config => {
     config.plugins.delete('preload')
