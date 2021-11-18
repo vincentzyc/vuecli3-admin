@@ -22,7 +22,7 @@ module.exports = {
   },
 
   devServer: {
-    port: 8060,
+    port: 3060,
     proxy: 'http://test-cms-admin.jetmobo.com'
   }
 };
