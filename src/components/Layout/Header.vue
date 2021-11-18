@@ -1,6 +1,6 @@
 <template>
   <div class="flex header-wrap">
-    <div class="logo align-self-middle">创意管理平台</div>
+    <div class="logo align-self-middle">后台管理系统</div>
     <div class="flex flex-auto justify-end align-middle">
       <el-dropdown trigger="click" class="flex dropdown align-middle" placement="bottom" @command="handleCommand">
         <span class="el-dropdown-link">
@@ -20,23 +20,25 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { CommonApi, getLoginUrl } from "@/api";
 import { getLocalStorage } from '@/utils/storage';
-import { ElDropdown, ElDropdownMenu, ElDropdownItem } from 'element-plus'
+import { ElDropdown, ElDropdownMenu, ElDropdownItem, ElMessage } from 'element-plus'
 
 const username = computed(() => {
-  let userInfo = getLocalStorage("contentUserInfo", true);
+  let userInfo = getLocalStorage("adminUserInfo", true);
   return userInfo ? userInfo.username : "Hello World";
 })
 
 const changePass = async () => {
-  window.location.href = await getLoginUrl()
+  ElMessage({
+    message: '修改密码',
+    type: 'success',
+  })
 }
 const loginout = async () => {
-  CommonApi.logout();
-  sessionStorage.clear();
-  localStorage.removeItem("contentUserInfo");
-  window.location.href = await getLoginUrl()
+  ElMessage({
+    message: '退出登录',
+    type: 'success',
+  })
 }
 const handleCommand = (command: string) => {
   switch (command) {
