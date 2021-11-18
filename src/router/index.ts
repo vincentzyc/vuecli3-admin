@@ -1,13 +1,10 @@
 import { easeout } from '@/utils/dom';
-import { setSessionStorage } from '@/utils/storage';
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-
-const checkLogin = () => window.location.href.includes('token=') ? "/login" : "/welcome";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
-    redirect: checkLogin()
+    redirect: '/home'
   },
   {
     path: "/login",
@@ -20,22 +17,26 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import("@/components/Layout/index.vue"),
     children: [
       {
-        path: '/home',
+        path: '/menu1',
         name: 'Home',
-        component: () => import(/* webpackChunkName: "home" */ '../views/Home.vue')
+        component: () => import(/* webpackChunkName: "menu1" */ '../views/Home.vue')
       },
       {
-        path: '/about',
+        path: '/menu2',
         name: 'About',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+        component: () => import(/* webpackChunkName: "menu2" */ '../views/About/index.vue'),
+        children: [
+          {
+            path: '/menu2/submenu1',
+            name: 'About1',
+            component: () => import('../views/About/About1.vue')
+          }
+        ]
       },
       {
-        path: '/welcome',
+        path: '/menu3',
         name: 'Welcome',
-        component: () => import(/* webpackChunkName: "home" */ '../views/Welcome.vue')
+        component: () => import(/* webpackChunkName: "menu3" */ '../views/Welcome.vue')
       },
     ]
   }, {
@@ -50,28 +51,11 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.name === "login") {
-    next();
-    return;
-  }
-  if (localStorage.getItem("creativeUserInfo")) {
-    next();
-  } else {
-    setSessionStorage("backUrl", window.location.href);
-    next('/login');
-  }
-})
-
 router.afterEach((to, from) => {
   if (to.name === from.name) return;
-  if (to.name === 'hotidea' && from.name === 'hotideaDetail') return
   if (window.dom_container) {
     easeout(window.dom_container, 0, 5);
   }
-  const _paq = window['_paq'] || [];
-  _paq.push(['setCustomUrl', to.path]);
-  _paq.push(['trackPageView']);
 })
 
 export default router
