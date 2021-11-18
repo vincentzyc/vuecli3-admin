@@ -4,8 +4,6 @@ import Axios from '@/plugins/axios'
 import { ElMessageBox } from 'element-plus'
 import { closeLoading } from "@/utils/loading";
 
-let loginUrl = '';
-
 const createInterface = (arr: ApiModule[]) => {
   const Interface: Record<string, any> = {};
   arr.forEach(v => {
@@ -38,14 +36,6 @@ export function env() {
   if (process.env.NODE_ENV === "development") return "development";
   if (window.location.href.includes('test-')) return 'test';
   return "production";
-}
-
-export async function getLoginUrl() {
-  if (loginUrl) return loginUrl;
-  const res = await CommonApi.checkToken<{ data: string }>('?token=666');//随便传一个token获取登录链接
-  // loginUrl = res.data.includes('auto=') ? res.data : res.data + res.data.includes('?') ? '&auto=1' : '?auto=1';
-  loginUrl = res.data;
-  return loginUrl;
 }
 
 export function axiosPost(config: Record<string, any>) {
