@@ -14,18 +14,8 @@ import { ref, onMounted } from 'vue'
 const text = ref("")
 const userInfo = ref<null | Record<string, any>>(null)
 
-onMounted(() => {
-  if (userInfo.value?.crmMenus) {
-    if (Array.isArray(userInfo.value.crmMenus) && userInfo.value?.crmMenus.length > 0) {
-      return text.value = `<h1 style="font-size:30px">您好，${userInfo.value?.username}</h1><h2 class="mg-t20" style="font-size:30px">欢迎使用骏伯投放平台</h2>`
-    }
-  } else {
-    return text.value = `<h1 style="font-size:30px">对不起，${userInfo.value?.username}</h1><h2 class="mg-t20" style="font-size:30px">您还没有任何权限，请联系管理员开通</h2>`
-  }
-})
-
-let localUserInfo = getLocalStorage("contentUserInfo", true);
-localUserInfo ? userInfo.value = userInfo : "";
+let localUserInfo = getLocalStorage("creativeUserInfo", true);
+localUserInfo ? userInfo.value = localUserInfo : "";
 
 let backUrl = getSessionStorage("backUrl");
 if (backUrl) {
@@ -33,5 +23,14 @@ if (backUrl) {
   window.location.href = backUrl;
 }
 
+onMounted(() => {
+  if (userInfo.value?.crmMenus) {
+    if (Array.isArray(userInfo.value.crmMenus) && userInfo.value?.crmMenus.length > 0) {
+      return text.value = `<h1 style="font-size:30px">您好，${userInfo.value?.username}</h1><h2 class="mg-t20" style="font-size:30px">欢迎使用创意管理平台</h2>`
+    }
+  } else {
+    return text.value = `<h1 style="font-size:30px">对不起，${userInfo.value?.username}</h1><h2 class="mg-t20" style="font-size:30px">您还没有任何权限，请联系管理员开通</h2>`
+  }
+})
 </script>
 
