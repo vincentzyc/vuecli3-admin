@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { nextTick, onMounted, ref } from "vue";
-import JunboHeader from "./Header1.vue";
+import JunboHeader from "./Header.vue";
 import JunboSidebar from "./Sidebar.vue";
 
 const showSidebar = ref(true)
