@@ -16,7 +16,7 @@
           <el-menu-item
             :index="subItem.menuIndex"
             :key="i"
-            @click="handleClick(subItem.menuIndex, subItem.menuName, item.menuName)"
+            @click="handleClick(subItem.menuIndex)"
             v-for="(subItem,i) in item.subMenus"
           >
             <span>{{ subItem.menuName }}</span>
@@ -24,7 +24,7 @@
         </el-sub-menu>
       </template>
       <template v-else>
-        <el-menu-item :index="item.menuIndex" :key="item.menuIndex" @click="handleClick(item.menuIndex, item.menuName)">
+        <el-menu-item :index="item.menuIndex" :key="item.menuIndex" @click="handleClick(item.menuIndex)">
           <span>{{ item.menuName }}</span>
         </el-menu-item>
       </template>
@@ -33,32 +33,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue';
-import { getLocalStorage } from '@/utils/storage';
+import { computed } from 'vue';
 import { isLink } from '@/utils/validate/link';
 import { ElMenu, ElMenuItem, ElSubMenu } from 'element-plus'
 import { useRoute, useRouter } from 'vue-router'
-
-interface menuItems {
-  subMenus: menuItems[],
-  menuIndex: string,
-  menuName: string
-}
+import crmMenus from './sidebar'
 
 const route = useRoute()
 const router = useRouter()
 
-const crmMenus = ref<menuItems[]>([])
 const onRoutes = computed(() => "/" + route.path.split("/")[1])
 
-const handleClick = (url: string, title: string, parName?: string) => {
-  window._paq.push(["trackEvent", parName || title, title]);
+const handleClick = (url: string) => {
   if (isLink(url)) return window.open(url);
   router.push(url)
 }
 
-let userInfo = getLocalStorage("creativeUserInfo", true);
-userInfo ? crmMenus.value = userInfo.crmMenus : [];
 </script>
 
 
