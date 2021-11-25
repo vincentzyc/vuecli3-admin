@@ -2,13 +2,14 @@ module.exports = {
   publicPath: "./",
   outputDir: "docs",
   productionSourceMap: false,
-  // configureWebpack: {
-  //   // 以下库使用cdn，不会被打包
-  //   externals: process.env.NODE_ENV === 'production' ? {
-  //     "vue": "Vue",
-  //     "vuex": "Vuex",
-  //   } : {}
-  // },
+  configureWebpack: {
+    externals: process.env.NODE_ENV === 'production' ? {
+      "vue": "Vue",
+      "vuex": "Vuex",
+      "vue-router": "VueRouter",
+      "element-plus": "ElementPlus"
+    } : {}
+  },
 
   // configureWebpack: {
   //   plugins: [
