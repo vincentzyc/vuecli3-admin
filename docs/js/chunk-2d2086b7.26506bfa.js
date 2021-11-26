@@ -1,0 +1,1 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d2086b7"],{a55b:function(n,e,c){"use strict";c.r(e);var o=c("8bbf"),t={class:"login-wrap"};function r(n,e){return Object(o["openBlock"])(),Object(o["createElementBlock"])("div",t,"登录")}var a=c("6b0d"),b=c.n(a);const s={},d=b()(s,[["render",r]]);e["default"]=d}}]);
