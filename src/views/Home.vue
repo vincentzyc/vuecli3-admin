@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import { useStore } from "@/store";
 import BasePage from "@/components/BasePage/index.vue"
-import { computed } from "@vue/reactivity";
+import { computed } from "vue";
 
 const store = useStore()
 
