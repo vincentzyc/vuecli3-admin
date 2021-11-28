@@ -1,5 +1,7 @@
 # vuecli3-admin
 
+## Vue3 全家桶 + TS + Element-Plus 
+
 ## Project setup
 ```
 npm install
