@@ -15,6 +15,6 @@ const store = useStore()
 
 const breadcrumb = computed(() => store.state.common.breadcrumb)
 
-store.commit('setBreadcrumb', ['111', '222'])
+store.commit('setBreadcrumb', ['home', 'home1'])
 
 </script>
