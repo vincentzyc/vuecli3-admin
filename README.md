@@ -22,5 +22,8 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Document
+See [Vue3](https://v3.vuejs.org/).
+See [Vue Router](https://v3.vuejs.org/).
+See [Vue Router](https://next.vuex.vuejs.org/).
+See [Vue Cli](https://cli.vuejs.org/config/).

@@ -1,4 +1,4 @@
-import { isObject, isArray } from '.';
+import { isArray, isObject } from "./validate/dataType";
 
 type ObjectIndex = Record<string, any>;
 
@@ -8,8 +8,8 @@ type ObjectIndex = Record<string, any>;
  * @return {Object} 拷贝后对象
  */
 export function deepClone(obj: ObjectIndex): ObjectIndex {
-  let result = isArray(obj) ? [] : {};
-  for (let key in obj) {
+  const result: ObjectIndex = isArray(obj) ? [] : {};
+  for (const key in obj) {
     if (Object.prototype.hasOwnProperty.call(obj, key)) {
       if (obj[key] === undefined || obj[key] === null) continue
       if (isObject(obj[key]) || isArray(obj[key])) {
