@@ -1,3 +1,5 @@
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
+
 module.exports = {
   publicPath: "./",
   outputDir: "docs",
@@ -8,7 +10,15 @@ module.exports = {
       "vuex": "Vuex",
       "vue-router": "VueRouter",
       "element-plus": "ElementPlus"
-    } : {}
+    } : {},
+    plugins: [
+      require('unplugin-auto-import/webpack')({
+        resolvers: [ElementPlusResolver()],
+      }),
+      require('unplugin-vue-components/webpack')({
+        resolvers: [ElementPlusResolver()],
+      })
+    ]
   },
   chainWebpack: config => {
     config.plugins.delete('preload')
@@ -16,6 +26,6 @@ module.exports = {
   },
   devServer: {
     port: 3060,
-    proxy: 'http://xxx.com'
+    // proxy: 'http://xxx.com'
   }
 }
