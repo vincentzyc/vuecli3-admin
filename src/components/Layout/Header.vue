@@ -21,7 +21,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { getLocalStorage } from '@/utils/storage';
-import { ElDropdown, ElDropdownMenu, ElDropdownItem, ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 const username = computed(() => {
   let userInfo = getLocalStorage("adminUserInfo", true);
