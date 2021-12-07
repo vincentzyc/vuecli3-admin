@@ -35,7 +35,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { isLink } from '@/utils/validate/link';
-import { ElMenu, ElMenuItem, ElSubMenu } from 'element-plus'
 import { useRoute, useRouter } from 'vue-router'
 import crmMenus from './sidebar'
 
