@@ -56,7 +56,6 @@ function getVideoPosterInfo(videoInfo: TypeVideoInfo): Promise<TypePosterVideo> 
         ctx.drawImage(video, 0, 0, width, height)
         const saturation = getImageSaturation(canvas)
         const posterUrl = canvas.toDataURL('image/jpeg')
-        console.log(posterUrl);
         resolve({ posterUrl, saturation, ...videoInfo })
       }
     })
