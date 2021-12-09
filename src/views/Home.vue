@@ -2,7 +2,7 @@
   <BasePage :paths="breadcrumb">
     <div class="jb-content">
       <h1>获取视频第一帧（支持多选）</h1>
-      <input type="file" id="file" @change="getFirstFrames" multiple />
+      <input type="file" id="file" @change="getFirstFrames" multiple accept="video/*" />
       <img :src="item" alt="第一帧" v-for="(item,key) in firstFrames" :key="key" />
     </div>
   </BasePage>
@@ -11,8 +11,8 @@
 <script lang="ts" setup>
 import BasePage from "@/components/BasePage/index.vue"
 import { useStore } from "@/store";
-import { ref, computed } from "vue";
 import { getPoster } from "@/utils/video-info";
+import { ref, computed } from "vue";
 
 const store = useStore()
 
