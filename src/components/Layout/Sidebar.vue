@@ -15,9 +15,9 @@
           </template>
           <el-menu-item
             :index="subItem.menuIndex"
-            :key="i"
+            :key="subItem.menuIndex"
             @click="handleClick(subItem.menuIndex)"
-            v-for="(subItem,i) in item.subMenus"
+            v-for="subItem in item.subMenus"
           >
             <span>{{ subItem.menuName }}</span>
           </el-menu-item>
@@ -41,7 +41,7 @@ import crmMenus from './sidebar'
 const route = useRoute()
 const router = useRouter()
 
-const onRoutes = computed(() => "/" + route.path.split("/")[1])
+const onRoutes = computed(() => route.path)
 
 const handleClick = (url: string) => {
   if (isLink(url)) return window.open(url);
