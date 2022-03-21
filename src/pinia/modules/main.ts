@@ -10,25 +10,7 @@ export const useMainStore = defineStore('main', {
     configTab: 'page',
     selectWg: null as Record<string, any> | null,
     dragWg: null as Record<string, any> | null,
-    pageData: {
-      list: [],
-      title: "云忆网络",
-      statsCode: "",
-      theme: "theme1",
-      fixedTop: [],
-      fixedBottom: [],
-      fixedCustom: [],
-      style: {
-        backgroundColor: "#fff",
-        backgroundImage: "",
-      },
-      hijackBack: {
-        isHijack: false,
-        alertImg: '',
-        alertLink: ''
-      }
-    } as Record<string, any> | null,
-    predefineColors: ['#000000', '#666666', '#cccccc', '#ffffff', 'rgba(255, 255, 255, 0)', '#ff0000', '#ff4500', '#ff8c00', '#ffd700', '#90ee90', '#00ced1', '#1e90ff', '#c71585']
+    breadcrumb: [] as string[]
   }),
   // optional getters
   getters: {
@@ -41,6 +23,9 @@ export const useMainStore = defineStore('main', {
   },
   // optional actions
   actions: {
+    setBreadcrumb(payload: string[]) {
+      this.breadcrumb = payload
+    },
     setDragWg(payload: Record<string, any> | null) {
       this.dragWg = payload;
     },
@@ -49,9 +34,6 @@ export const useMainStore = defineStore('main', {
     },
     setConfigTab(payload: string) {
       this.configTab = payload;
-    },
-    setPageData(payload: Record<string, any> | null) {
-      this.pageData = payload;
     },
     reset() {
       // `this` is the store instance
