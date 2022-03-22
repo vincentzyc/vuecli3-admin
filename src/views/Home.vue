@@ -3,22 +3,23 @@
     <div class="jb-content">
       <h1>获取视频第一帧（支持多选）</h1>
       <input type="file" id="file" @change="getFirstFrames" multiple accept="video/*" />
-      <img :src="item" alt="第一帧" v-for="(item,key) in firstFrames" :key="key" />
+      <img :src="item" alt="第一帧" v-for="(item, key) in firstFrames" :key="key" />
     </div>
   </BasePage>
 </template>
 
 <script lang="ts" setup>
 import BasePage from "@/components/BasePage/index.vue"
-import { useStore } from "@/store";
 import { getPoster } from "@/utils/video-info";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
-const store = useStore()
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
-const breadcrumb = computed(() => store.state.common.breadcrumb)
+const mainStore = useMainStore()
+const { breadcrumb } = storeToRefs(mainStore)
 
-store.commit('setBreadcrumb', ['home', 'home1'])
+mainStore.setBreadcrumb(['home', 'home1'])
 
 const firstFrames = ref<string[]>([])
 
