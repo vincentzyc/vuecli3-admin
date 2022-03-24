@@ -9,17 +9,20 @@
 </template>
 
 <script lang="ts" setup>
-import { useStore } from "@/store";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from 'vue-router'
 import BasePage from "@/components/BasePage/index.vue"
 import { getImageInfo } from "@/utils/image-info";
 
-const store = useStore()
-const router = useRouter()
-const breadcrumb = computed(() => store.state.common.breadcrumb)
+import { useMainStore } from '@/pinia'
+import { storeToRefs } from 'pinia'
 
-store.commit('setBreadcrumb', ['about', 'about1'])
+const mainStore = useMainStore()
+const { breadcrumb } = storeToRefs(mainStore)
+
+mainStore.setBreadcrumb(['about', 'about1'])
+
+const router = useRouter()
 
 const info = ref()
 
