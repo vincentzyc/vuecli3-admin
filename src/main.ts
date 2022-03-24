@@ -8,8 +8,6 @@ import './assets/css/main.styl'
 
 const app = createApp(App);
 
-app.use(createPinia())
-
 app.config.globalProperties.BASE_URL = process.env.BASE_URL
 
 app.use(createPinia()).use(router).mount('#app')
