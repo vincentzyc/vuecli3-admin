@@ -26,7 +26,6 @@ export function getUrlParam(name?: string | null, newUrl?: string) {
   if (name) return obj[name]
   return obj
 }
-
 /**
  * 判断是否存在 key
  * @param obj 判断对象
@@ -37,7 +36,17 @@ export function hasKey(obj: unknown, key: string): boolean {
   if (!obj) return false
   return Object.prototype.hasOwnProperty.call(obj, key)
 }
-
+/**
+ * 获取两个值之间的随机整数
+ * @param min 最小值（包括）
+ * @param min 最大值（不包括）
+ * @return {Number} 随机整数
+ */
+export function getRandomInt(min = 1, max = 100): number {
+  const minNum = Math.ceil(min);
+  const maxNum = Math.floor(max);
+  return Math.floor(Math.random() * (maxNum - minNum) + minNum);
+}
 
 export function isDef(val: unknown): boolean {
   return val !== undefined && val !== null;
