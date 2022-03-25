@@ -5,6 +5,8 @@ module.exports = {
   outputDir: "docs",
   productionSourceMap: false,
   configureWebpack: {
+    // 配置了 ElementPlus 自动按需加载的话，打包使用cdn资源会失效，两者会有冲突
+    // github issues: https://github.com/antfu/unplugin-vue-components/issues/211
     externals: process.env.NODE_ENV === 'production' ? {
       "vue": "Vue",
       "vuex": "Vuex",
